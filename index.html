@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Swae Systems — 24/7 AI Concierge for Med Spas</title>
-  <meta name="description" content="Swae Systems builds 24/7 AI concierges for med spas. We answer every DM, text, and website chat instantly, collect full intake, and book appointments while your team sleeps." />
+  <meta name="description" content="Swae Systems builds a 24/7 AI concierge for med spas. It answers DMs, texts, and website chats instantly, collects full intake, and drops every lead into a clean Google Sheet so your team only talks to ready-to-book patients." />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,834 +12,984 @@
 
   <style>
     :root {
-      --bg-deep: #020308;
-      --bg-soft: #080910;
-      --accent: #f5c56b;
-      --accent-soft: rgba(245, 197, 107, 0.16);
-      --text-main: #ffffff;
-      --text-dim: #b3b3b3;
-      --border-soft: rgba(255, 255, 255, 0.08);
-      --danger: #ff5c5c;
-      --safe: #4ade80;
+      --bg-deep:#020204;
+      --bg-soft:#08080c;
+      --bg-card:#050509;
+      --gold:#d4af37;
+      --gold-soft:rgba(212,175,55,0.18);
+      --gold-strong:rgba(212,175,55,0.95);
+      --text-main:#ffffff;
+      --text-dim:#b3b3b3;
+      --border-soft:rgba(255,255,255,0.09);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *,*::before,*::after{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #141414 0, #020308 45%, #000 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
+    html,body{
+      height:100%;
+      scroll-behavior:smooth;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* NAV */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      padding: 1.1rem 7vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(to bottom, rgba(2, 3, 8, 0.92), rgba(2, 3, 8, 0.75), transparent);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 197, 107, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    body{
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:
-        radial-gradient(circle at 0 0, rgba(245, 197, 107, 0.18), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(245, 197, 107, 0.18), transparent 55%),
-        #020308;
+        radial-gradient(circle at top, #151515 0, #050509 40%, #000 100%);
+      color:var(--text-main);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .page{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* NAVBAR */
+    .nav{
+      position:fixed;
+      inset-inline:0;
+      top:0;
+      z-index:50;
+      padding:.9rem 7vw;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      backdrop-filter:blur(18px);
+      background:linear-gradient(to bottom,rgba(0,0,0,0.94),rgba(0,0,0,0.7),transparent);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-left{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+    }
+
+    .logo-mark{
+      width:36px;
+      height:36px;
+      border-radius:999px;
+      border:1px solid rgba(212,175,55,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 0 0,rgba(212,175,55,0.3),transparent 55%),
+        radial-gradient(circle at 100% 100%,rgba(212,175,55,0.2),transparent 55%),
+        #050509;
       box-shadow:
-        0 0 22px rgba(245, 197, 107, 0.24),
-        inset 0 0 12px rgba(0, 0, 0, 0.8);
-      font-family: "Playfair Display", serif;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-      color: var(--accent);
+        0 0 20px rgba(212,175,55,0.45),
+        inset 0 0 18px rgba(0,0,0,0.9);
+      font-family:"Playfair Display",serif;
+      font-size:1.1rem;
+      letter-spacing:.08em;
+      color:var(--gold);
     }
 
-    .logo-text-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
+    .logo-text-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:.12rem;
     }
 
-    .logo-text-main {
-      font-family: "Playfair Display", serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .logo-title{
+      font-family:"Playfair Display",serif;
+      font-size:1.1rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
     }
 
-    .logo-text-sub {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-dim);
+    .logo-sub{
+      font-size:.7rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--text-dim);
     }
 
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.9rem;
-      color: var(--text-dim);
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:1.6rem;
+      font-size:.9rem;
+      color:var(--text-dim);
     }
 
-    .nav-links a {
-      position: relative;
-      padding-bottom: 0.15rem;
+    .nav-links a{
+      position:relative;
+      padding-bottom:.1rem;
     }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.26s ease;
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:width .22s ease-out;
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
+    .nav-links a:hover::after{
+      width:100%;
     }
 
-    .nav-cta {
-      padding: 0.45rem 1.1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 197, 107, 0.6);
-      background: radial-gradient(circle at top left, rgba(245, 197, 107, 0.25), rgba(2, 3, 8, 0.9));
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+    .nav-cta{
+      padding:.45rem 1.1rem;
+      border-radius:999px;
+      border:1px solid var(--gold);
+      background:radial-gradient(circle at top left,rgba(212,175,55,0.4),rgba(0,0,0,0.96));
+      color:var(--text-main);
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      display:flex;
+      align-items:center;
+      gap:.4rem;
     }
 
-    .nav-cta span:last-child {
-      font-size: 0.9rem;
+    .nav-cta-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 12px rgba(212,175,55,0.9);
     }
 
-    /* Burger */
-    .burger {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      background: rgba(0, 0, 0, 0.55);
+    /* BURGER */
+    .burger{
+      width:36px;
+      height:36px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      background:rgba(0,0,0,0.55);
     }
 
-    .burger-inner {
-      width: 16px;
-      height: 12px;
-      position: relative;
+    .burger-inner{
+      width:18px;
+      height:14px;
+      position:relative;
     }
 
-    .burger-line {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 2px;
-      border-radius: 99px;
-      background: #ffffff;
-      transition: transform 0.26s ease, opacity 0.26s ease, top 0.26s ease, bottom 0.26s ease;
+    .burger-line{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      border-radius:999px;
+      background:#ffffff;
+      transition:transform .22s ease,opacity .22s ease,top .22s ease,bottom .22s ease;
     }
 
-    .burger-line:nth-child(1) { top: 0; }
-    .burger-line:nth-child(2) { top: 5px; }
-    .burger-line:nth-child(3) { bottom: 0; }
+    .burger-line:nth-child(1){ top:0; }
+    .burger-line:nth-child(2){ top:6px; }
+    .burger-line:nth-child(3){ bottom:0; }
 
-    .burger.open .burger-line:nth-child(1) {
-      top: 5px;
-      transform: rotate(45deg);
+    .burger.open .burger-line:nth-child(1){
+      top:6px;
+      transform:rotate(45deg);
+    }
+    .burger.open .burger-line:nth-child(2){
+      opacity:0;
+    }
+    .burger.open .burger-line:nth-child(3){
+      bottom:6px;
+      transform:rotate(-45deg);
     }
 
-    .burger.open .burger-line:nth-child(2) {
-      opacity: 0;
+    .nav-mobile{
+      display:none;
+      position:fixed;
+      top:58px;
+      left:0;
+      right:0;
+      padding:1.25rem 7vw 1.5rem;
+      background:
+        radial-gradient(circle at top,#151515,#020204 55%);
+      border-bottom:1px solid rgba(255,255,255,0.09);
+      z-index:40;
     }
 
-    .burger.open .burger-line:nth-child(3) {
-      bottom: 5px;
-      transform: rotate(-45deg);
+    .nav-mobile-inner{
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      font-size:.88rem;
     }
 
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      padding: 1.5rem 7vw 1.75rem;
-      background: radial-gradient(circle at top, #0b0b0b, #020308 55%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      z-index: 40;
+    .nav-mobile-inner a{
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--text-dim);
     }
 
-    .nav-mobile-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
+    .nav-mobile-inner .nav-cta{
+      margin-top:.6rem;
+      width:fit-content;
     }
 
-    .nav-mobile-inner a {
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+    /* SECTIONS */
+    main{
+      flex:1;
     }
 
-    .nav-mobile-inner .nav-cta {
-      width: fit-content;
-      margin-top: 0.5rem;
+    .section{
+      padding:4.75rem 7vw 3.5rem;
+    }
+
+    .section-inner{
+      max-width:1120px;
+      margin:0 auto;
+    }
+
+    .section-label{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--text-dim);
+      margin-bottom:.5rem;
+    }
+
+    .section-title{
+      font-family:"Playfair Display",serif;
+      font-size:1.8rem;
+      margin-bottom:1.6rem;
     }
 
     /* HERO */
-    .hero {
-      padding: 7.5rem 7vw 4rem;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 3rem;
-      align-items: center;
+    .hero{
+      padding:7.2rem 7vw 4.2rem;
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(0,1.1fr);
+      gap:3rem;
+      align-items:center;
     }
 
-    .hero-left {
-      max-width: 580px;
+    .hero-copy{
+      max-width:560px;
     }
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.9rem 0.25rem 0.3rem;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: radial-gradient(circle at left, rgba(245, 197, 107, 0.28), transparent 55%);
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      margin-bottom: 1.4rem;
+    .hero-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.22rem .9rem .22rem .3rem;
+      border-radius:999px;
+      border:1px solid var(--border-soft);
+      background:radial-gradient(circle at left,rgba(212,175,55,0.35),transparent 65%);
+      font-size:.78rem;
+      color:var(--text-dim);
+      margin-bottom:1.3rem;
     }
 
-    .hero-tag-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      background: radial-gradient(circle, var(--accent), transparent 70%);
-      box-shadow: 0 0 18px rgba(245, 197, 107, 0.7);
+    .hero-tag-dot{
+      width:14px;
+      height:14px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 16px rgba(212,175,55,0.9);
     }
 
-    .hero-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.3rem, 4vw, 3rem);
-      line-height: 1.12;
-      margin-bottom: 1rem;
+    .hero-title{
+      font-family:"Playfair Display",serif;
+      font-size:clamp(2.4rem,4vw,3.1rem);
+      line-height:1.1;
+      margin-bottom:.8rem;
     }
 
-    .hero-title span.gold {
-      color: var(--accent);
+    .hero-title span.gold{
+      color:var(--gold);
     }
 
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--text-dim);
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 1.6rem;
+    .hero-sub{
+      font-size:.98rem;
+      color:var(--text-dim);
+      max-width:460px;
+      line-height:1.6;
+      margin-bottom:1.55rem;
     }
 
-    .hero-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      font-size: 0.8rem;
+    .hero-bullets{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+      margin-bottom:1.8rem;
+      font-size:.82rem;
     }
 
-    .hero-pill {
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 8, 12, 0.9);
-      color: var(--text-dim);
+    .hero-badge{
+      padding:.32rem .9rem;
+      border-radius:999px;
+      border:1px solid var(--border-soft);
+      background:rgba(0,0,0,0.8);
+      color:var(--text-dim);
     }
 
-    .hero-pill strong {
-      color: var(--accent);
-      font-weight: 500;
+    .hero-badge strong{
+      color:var(--gold);
+      font-weight:500;
     }
 
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-bottom: 1.6rem;
+    .hero-cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:.75rem;
+      margin-bottom:1.2rem;
     }
 
-    .btn-primary {
-      padding: 0.7rem 1.4rem;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 197, 107, 0.9);
-      background: radial-gradient(circle at top left, rgba(245, 197, 107, 0.35), rgba(2, 3, 8, 0.98));
-      font-size: 0.9rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    .btn{
+      padding:.78rem 1.6rem;
+      border-radius:999px;
+      font-size:.86rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background .18s ease,color .18s ease;
+      background:none;
+      color:inherit;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(245, 197, 107, 0.5);
+    .btn-primary{
+      border-color:var(--gold);
+      background:radial-gradient(circle at top left,rgba(212,175,55,0.45),rgba(0,0,0,0.95));
+      color:var(--text-main);
+      box-shadow:0 0 24px rgba(212,175,55,0.55);
     }
 
-    .btn-ghost {
-      padding: 0.7rem 1.4rem;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: rgba(8, 8, 12, 0.9);
-      font-size: 0.9rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      color: var(--text-dim);
-      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    .btn-primary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 32px rgba(212,175,55,0.8);
     }
 
-    .btn-ghost span.icon {
-      font-size: 1.15rem;
+    .btn-ghost{
+      border-color:var(--border-soft);
+      background:rgba(0,0,0,0.85);
+      color:var(--text-dim);
     }
 
-    .btn-ghost:hover {
-      border-color: rgba(255, 255, 255, 0.55);
-      color: var(--text-main);
-      background: rgba(15, 15, 21, 0.98);
+    .btn-ghost:hover{
+      border-color:rgba(255,255,255,0.65);
+      color:var(--text-main);
     }
 
-    .hero-footnote {
-      font-size: 0.75rem;
-      color: var(--text-dim);
+    .hero-footnote{
+      font-size:.78rem;
+      color:var(--text-dim);
     }
 
-    .hero-footnote span.safe-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--safe);
-      margin-right: 0.35rem;
+    .hero-footnote span{
+      color:var(--gold);
+      font-weight:500;
     }
 
-    .hero-right {
-      position: relative;
-      min-height: 340px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .hero-visual{
+      position:relative;
+      min-height:340px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .hero-frame {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      aspect-ratio: 9 / 16;
-      border-radius: 32px;
-      padding: 0.85rem;
-      background: radial-gradient(circle at top, #161616, #050509);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow:
-        0 0 0 1px rgba(245, 197, 107, 0.06),
-        0 30px 80px rgba(0, 0, 0, 0.9);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .hero-frame-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-frame-header span.badge {
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 197, 107, 0.6);
-      background: rgba(245, 197, 107, 0.12);
-      color: var(--accent);
-      font-size: 0.65rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .hero-screen {
-      flex: 1;
-      border-radius: 24px;
-      padding: 0.9rem;
-      background-image: url("hero-spa.PNG");
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(2, 3, 8, 0.96), rgba(2, 3, 8, 0.06));
-    }
-
-    .hero-chat {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 2.1rem;
-    }
-
-    .bubble {
-      max-width: 80%;
-      padding: 0.5rem 0.7rem;
-      border-radius: 14px;
-      font-size: 0.7rem;
-      line-height: 1.45;
-    }
-
-    .bubble.client {
-      align-self: flex-start;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .bubble.ai {
-      align-self: flex-end;
-      background: rgba(245, 197, 107, 0.16);
-      border: 1px solid rgba(245, 197, 107, 0.7);
-    }
-
-    .bubble.ai strong {
-      color: var(--accent);
-    }
-
-    .hero-status-row {
-      position: relative;
-      margin-top: 0.8rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.68rem;
-      color: var(--text-dim);
-    }
-
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    .status-pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--safe);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-    }
-
-    .mini-metric {
-      font-size: 0.63rem;
-      opacity: 0.9;
-    }
-
-    .mini-metric span {
-      color: var(--accent);
-    }
-
-    /* SECTION WRAP */
-    .section {
-      padding: 3.5rem 7vw 1.5rem;
-    }
-
-    .section-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.6rem;
-      margin-bottom: 1.6rem;
-    }
-
-    /* 3 columns “Why med spas use us” */
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.8rem;
-    }
-
-    .card {
-      border-radius: 18px;
-      border: 1px solid var(--border-soft);
-      background: radial-gradient(circle at top, rgba(245, 197, 107, 0.07), rgba(8, 8, 12, 0.96));
-      padding: 1.4rem 1.2rem;
-    }
-
-    .card h3 {
-      font-size: 1.02rem;
-      margin-bottom: 0.55rem;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
-    .card-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.2rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      margin-bottom: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .card-pill span.dot-danger {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--danger);
-      box-shadow: 0 0 8px rgba(248, 113, 113, 0.8);
-    }
-
-    .card-pill span.dot-safe {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--safe);
-      box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
-    }
-
-    /* HOW IT WORKS */
-    .how-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 2.4rem;
-      align-items: flex-start;
-    }
-
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .step {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-    }
-
-    .step-number {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 197, 107, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--accent);
-    }
-
-    .step-body h3 {
-      font-size: 0.98rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .step-body p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
-    .how-card {
-      border-radius: 18px;
-      border: 1px solid var(--border-soft);
+    .hero-frame{
+      width:100%;
+      max-width:420px;
+      aspect-ratio:9/16;
+      border-radius:30px;
+      padding:.85rem;
       background:
-        radial-gradient(circle at top, rgba(245, 197, 107, 0.07), rgba(8, 8, 12, 0.96)),
-        url("owner-dashboard.PNG");
-      background-size: cover;
-      background-position: center;
-      padding: 1.2rem;
-      min-height: 230px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+        radial-gradient(circle at top,rgba(212,175,55,0.08),#050509);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 0 1px rgba(212,175,55,0.08),
+        0 28px 70px rgba(0,0,0,0.9);
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+      overflow:hidden;
     }
 
-    .how-card-inner {
-      background: linear-gradient(to top, rgba(2, 3, 8, 0.94), rgba(2, 3, 8, 0.86));
-      border-radius: 14px;
-      padding: 1rem;
+    .hero-frame-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:.7rem;
+      color:var(--text-dim);
+      margin-bottom:.2rem;
     }
 
-    .how-card-title {
-      font-size: 0.94rem;
-      margin-bottom: 0.3rem;
+    .hero-frame-badge{
+      padding:.18rem .6rem;
+      border-radius:999px;
+      border:1px solid var(--gold-soft);
+      background:rgba(0,0,0,0.85);
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      font-size:.62rem;
     }
 
-    .mini-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: var(--text-dim);
+    .hero-screen{
+      flex:1;
+      border-radius:22px;
+      padding:.9rem;
+      background-image:url("hero-chat.PNG");
+      background-size:cover;
+      background-position:center;
+      position:relative;
+      overflow:hidden;
     }
 
-    .mini-row span.value {
-      color: var(--accent);
+    .hero-screen-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,0.96),rgba(0,0,0,0.1));
     }
 
-    /* CONTACT */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2.4rem;
-      align-items: flex-start;
+    .hero-chat{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      gap:.45rem;
+      margin-top:1.7rem;
     }
 
-    .contact-card {
-      border-radius: 18px;
-      border: 1px solid var(--border-soft);
-      background: radial-gradient(circle at top, rgba(245, 197, 107, 0.08), rgba(8, 8, 12, 0.96));
-      padding: 1.6rem 1.4rem;
+    .bubble{
+      max-width:80%;
+      padding:.48rem .7rem;
+      border-radius:14px;
+      font-size:.7rem;
+      line-height:1.45;
     }
 
-    .contact-card p {
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
+    .bubble.client{
+      align-self:flex-start;
+      background:rgba(0,0,0,0.8);
+      border:1px solid rgba(255,255,255,0.12);
     }
 
-    .contact-lines {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      font-size: 0.9rem;
+    .bubble.ai{
+      align-self:flex-end;
+      background:rgba(212,175,55,0.16);
+      border:1px solid rgba(212,175,55,0.7);
     }
 
-    .contact-lines a {
-      color: var(--accent);
+    .bubble.ai strong{
+      color:var(--gold);
     }
 
-    .contact-form {
-      border-radius: 18px;
-      border: 1px solid var(--border-soft);
-      background: rgba(8, 8, 12, 0.96);
-      padding: 1.4rem 1.3rem;
+    .hero-status{
+      position:relative;
+      z-index:1;
+      margin-top:.75rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:.68rem;
+      color:var(--text-dim);
     }
 
-    .contact-form h3 {
-      font-size: 1rem;
-      margin-bottom: 0.9rem;
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      padding:.2rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(0,0,0,0.8);
+      font-size:.66rem;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 0.8rem;
+    .status-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 12px rgba(212,175,55,0.9);
     }
 
-    .form-row-full {
-      margin-top: 0.8rem;
+    .status-metric span{
+      color:var(--gold);
     }
 
-    label {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      display: block;
-      margin-bottom: 0.25rem;
+    /* DEMO SECTION */
+    .demo-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+      gap:2.4rem;
+      align-items:center;
     }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 0.55rem 0.7rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(4, 4, 8, 0.95);
-      color: var(--text-main);
-      font-size: 0.86rem;
-      outline: none;
+    .demo-card{
+      border-radius:22px;
+      border:1px solid var(--border-soft);
+      background:radial-gradient(circle at top,rgba(212,175,55,0.08),var(--bg-card));
+      padding:1.5rem 1.4rem;
+    }
+
+    .demo-lead{
+      font-size:.9rem;
+      color:var(--text-dim);
+      margin-bottom:1.2rem;
+    }
+
+    .demo-list{
+      display:flex;
+      flex-direction:column;
+      gap:.55rem;
+      list-style:none;
+      font-size:.88rem;
+      color:var(--text-dim);
+    }
+
+    .demo-list li::before{
+      content:"—";
+      margin-right:.4rem;
+      color:var(--gold);
+    }
+
+    .demo-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.75rem;
+      margin-top:1.4rem;
+    }
+
+    .demo-visual{
+      border-radius:22px;
+      border:1px solid var(--border-soft);
+      background-image:url("demo-dashboard.PNG");
+      background-size:cover;
+      background-position:center;
+      min-height:230px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .demo-visual-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,0.96),rgba(0,0,0,0.3));
+    }
+
+    .demo-visual-inner{
+      position:relative;
+      z-index:1;
+      padding:1rem 1.2rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      height:100%;
+    }
+
+    .demo-visual-top{
+      font-size:.85rem;
+      color:var(--text-dim);
+      margin-bottom:.6rem;
+    }
+
+    .demo-visual-stat{
+      font-size:.8rem;
+      color:var(--text-dim);
+    }
+
+    .demo-visual-stat span{
+      color:var(--gold);
+    }
+
+    /* COMPARE SECTION */
+    .compare-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--border-soft);
+      background:rgba(0,0,0,0.85);
+      font-size:.85rem;
+    }
+
+    .compare-table thead{
+      background:linear-gradient(to right,rgba(212,175,55,0.22),rgba(0,0,0,0.95));
+    }
+
+    .compare-table th,
+    .compare-table td{
+      padding:.75rem 1rem;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+
+    .compare-table th{
+      text-align:left;
+      font-weight:500;
+    }
+
+    .compare-table th.highlight{
+      color:var(--gold);
+    }
+
+    .compare-table tbody tr:last-child td{
+      border-bottom:none;
+    }
+
+    .pill-good{
+      display:inline-flex;
+      padding:.15rem .55rem;
+      border-radius:999px;
+      border:1px solid var(--gold-soft);
+      color:var(--gold);
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+
+    /* PRODUCT / FEATURES */
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1.8rem;
+    }
+
+    .card{
+      border-radius:18px;
+      border:1px solid var(--border-soft);
+      background:radial-gradient(circle at top,rgba(212,175,55,0.08),var(--bg-card));
+      padding:1.4rem 1.3rem;
+      font-size:.9rem;
+      color:var(--text-dim);
+    }
+
+    .card h3{
+      font-size:1rem;
+      margin-bottom:.4rem;
+      color:var(--text-main);
+    }
+
+    .card-tag{
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--gold);
+      margin-bottom:.6rem;
+    }
+
+    /* RESULTS */
+    .results-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1.6rem;
+    }
+
+    .quote{
+      border-radius:16px;
+      border:1px solid var(--border-soft);
+      background:rgba(0,0,0,0.9);
+      padding:1.1rem 1.1rem;
+      font-size:.86rem;
+      color:var(--text-dim);
+    }
+
+    .quote-stars{
+      color:var(--gold);
+      font-size:.9rem;
+      margin-bottom:.4rem;
+    }
+
+    .quote strong{
+      display:block;
+      margin-top:.5rem;
+      color:var(--text-main);
+      font-size:.8rem;
+    }
+
+    /* PRICING */
+    .pricing-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1.7rem;
+    }
+
+    .tier{
+      border-radius:18px;
+      border:1px solid var(--border-soft);
+      background:rgba(0,0,0,0.9);
+      padding:1.5rem 1.4rem;
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;
+      font-size:.88rem;
+      color:var(--text-dim);
+    }
+
+    .tier.highlight{
+      border-color:var(--gold);
+      box-shadow:0 0 26px rgba(212,175,55,0.55);
+    }
+
+    .tier-label{
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--gold);
+    }
+
+    .tier-name{
+      font-size:1rem;
+      color:var(--text-main);
+    }
+
+    .tier-price{
+      font-size:1.1rem;
+      color:var(--gold);
+    }
+
+    .tier ul{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+    }
+
+    .tier ul li::before{
+      content:"●";
+      margin-right:.35rem;
+      font-size:.55rem;
+      color:var(--gold);
+    }
+
+    .tier-footer{
+      margin-top:auto;
+      padding-top:.7rem;
+    }
+
+    /* FAQ */
+    .faq-list{
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+    }
+
+    .faq-item{
+      border-radius:14px;
+      border:1px solid var(--border-soft);
+      background:rgba(0,0,0,0.9);
+      overflow:hidden;
+    }
+
+    .faq-q{
+      padding:.8rem .95rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:.9rem;
+      cursor:pointer;
+    }
+
+    .faq-q span{
+      font-weight:500;
+    }
+
+    .faq-toggle{
+      font-size:1.1rem;
+      color:var(--text-dim);
+    }
+
+    .faq-a{
+      padding:0 .95rem .8rem;
+      font-size:.86rem;
+      color:var(--text-dim);
+      display:none;
+    }
+
+    .faq-item.open .faq-a{
+      display:block;
+    }
+
+    /* CONTACT / FINAL CTA */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+      gap:2rem;
+      align-items:flex-start;
+    }
+
+    .contact-card{
+      border-radius:18px;
+      border:1px solid var(--border-soft);
+      background:rgba(0,0,0,0.92);
+      padding:1.5rem 1.4rem;
+      font-size:.9rem;
+      color:var(--text-dim);
+    }
+
+    .contact-lines{
+      margin-top:.9rem;
+      display:flex;
+      flex-direction:column;
+      gap:.4rem;
+    }
+
+    .contact-lines a{
+      color:var(--gold);
+    }
+
+    .contact-note{
+      font-size:.8rem;
+      margin-top:.7rem;
+    }
+
+    .contact-form{
+      border-radius:18px;
+      border:1px solid var(--border-soft);
+      background:rgba(5,5,10,0.96);
+      padding:1.4rem 1.3rem;
+      font-size:.86rem;
+      color:var(--text-dim);
+    }
+
+    .contact-form h3{
+      font-size:.98rem;
+      margin-bottom:.7rem;
+      color:var(--text-main);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:.75rem;
+    }
+
+    .form-row-full{
+      margin-top:.7rem;
+    }
+
+    label{
+      display:block;
+      font-size:.78rem;
+      color:var(--text-dim);
+      margin-bottom:.2rem;
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:.5rem .65rem;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.92);
+      color:var(--text-main);
+      font-size:.86rem;
+      outline:none;
     }
 
     input::placeholder,
-    textarea::placeholder {
-      color: #555;
+    textarea::placeholder{
+      color:#555;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
+    textarea{
+      resize:vertical;
+      min-height:80px;
     }
 
-    .form-footnote {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 0.6rem;
+    .btn-form{
+      width:100%;
+      justify-content:center;
+      margin-top:.9rem;
     }
 
-    .form-footnote span {
-      color: var(--accent);
+    .form-footnote{
+      margin-top:.6rem;
+      font-size:.76rem;
     }
 
-    .btn-form {
-      margin-top: 0.9rem;
-      width: 100%;
-      justify-content: center;
+    .form-footnote span{
+      color:var(--gold);
     }
 
     /* FOOTER */
-    .footer {
-      padding: 1.8rem 7vw 2.2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: var(--text-dim);
+    .footer{
+      padding:1.8rem 7vw 2.2rem;
+      border-top:1px solid rgba(255,255,255,0.08);
+      font-size:.8rem;
+      color:var(--text-dim);
+      margin-top:2rem;
     }
 
-    .footer-row {
-      max-width: 1080px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
+    .footer-inner{
+      max-width:1120px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      align-items:center;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-dim);
+    .footer-links{
+      display:flex;
+      gap:.8rem;
+      flex-wrap:wrap;
     }
 
     /* RESPONSIVE */
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-        padding-top: 7rem;
+    @media(max-width:960px){
+      .hero{
+        grid-template-columns:minmax(0,1fr);
+        padding-top:7rem;
       }
-      .hero-right {
-        order: -1;
+      .hero-visual{
+        order:-1;
       }
-      .hero-left {
-        max-width: 100%;
-      }
-      .grid-3 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .how-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .demo-grid,
+      .contact-grid{
+        grid-template-columns:minmax(0,1fr);
       }
     }
 
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
+    @media(max-width:840px){
+      .grid-3,
+      .results-grid,
+      .pricing-grid{
+        grid-template-columns:minmax(0,1fr);
       }
-      .burger {
-        display: flex;
+    }
+
+    @media(max-width:768px){
+      .nav-links{
+        display:none;
       }
-      .section {
-        padding-inline: 6vw;
+      .burger{
+        display:flex;
       }
-      .hero {
-        padding-inline: 6vw;
+      .hero,
+      .section{
+        padding-inline:6vw;
       }
-      .form-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .form-grid{
+        grid-template-columns:minmax(0,1fr);
       }
     }
   </style>
@@ -851,105 +1001,107 @@
       <div class="nav-left">
         <div class="logo-mark">S</div>
         <div class="logo-text-wrap">
-          <div class="logo-text-main">Swae Systems</div>
-          <div class="logo-text-sub">Med Spa AI Concierge</div>
+          <div class="logo-title">Swae Systems</div>
+          <div class="logo-sub">Med Spa AI Concierge</div>
         </div>
       </div>
       <nav class="nav-links">
-        <a href="#why">Why Med Spas Choose Us</a>
-        <a href="#how">How It Works</a>
-        <a href="#contact">Contact</a>
-        <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener" class="nav-cta">
-          <span>●</span><span>Live Demo</span>
+        <a href="#demo">Product</a>
+        <a href="#compare">Swae vs Others</a>
+        <a href="#results">Results</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">Q&amp;A</a>
+        <a href="#demo" class="nav-cta">
+          <span class="nav-cta-dot"></span>
+          <span>Try live demo</span>
         </a>
       </nav>
-      <div class="burger" id="burger">
+      <button class="burger" id="burger" aria-label="Open navigation">
         <div class="burger-inner">
           <div class="burger-line"></div>
           <div class="burger-line"></div>
           <div class="burger-line"></div>
         </div>
-      </div>
+      </button>
     </header>
 
     <!-- MOBILE NAV -->
-    <div class="nav-mobile" id="nav-mobile">
+    <nav class="nav-mobile" id="nav-mobile">
       <div class="nav-mobile-inner">
-        <a href="#why" onclick="closeMobileNav()">Why Med Spas Choose Us</a>
-        <a href="#how" onclick="closeMobileNav()">How It Works</a>
-        <a href="#contact" onclick="closeMobileNav()">Contact</a>
-        <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener" class="nav-cta">
-          <span>●</span><span>View Live Demo</span>
+        <a href="#demo" onclick="closeMobileNav()">Product</a>
+        <a href="#compare" onclick="closeMobileNav()">Swae vs Others</a>
+        <a href="#results" onclick="closeMobileNav()">Results</a>
+        <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+        <a href="#faq" onclick="closeMobileNav()">Q&amp;A</a>
+        <a href="#demo" class="nav-cta" onclick="closeMobileNav()">
+          <span class="nav-cta-dot"></span><span>Try live demo</span>
         </a>
       </div>
-    </div>
+    </nav>
 
-    <!-- HERO -->
     <main>
-      <section class="hero">
-        <div class="hero-left">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-copy">
           <div class="hero-tag">
             <div class="hero-tag-dot"></div>
-            <span>For med spas only — not generic “AI agency” fluff</span>
+            <span>Built only for med spas — not generic “AI agencies”</span>
           </div>
           <h1 class="hero-title">
             Your clinic’s <span class="gold">24/7 AI concierge</span> that never misses a lead.
           </h1>
           <p class="hero-sub">
-            Swae Systems plugs a HIPAA-aware AI receptionist into your med spa. It answers pricing questions, handles pre-qualification, and books appointments across chat, text, and web — even at 2:00 a.m.
+            Swae Systems answers DMs, texts, and website chats in seconds, pre-qualifies patients, and logs every lead into a clean Google Sheet — so your staff only talks to people ready to book.
           </p>
-
-          <div class="hero-pills">
-            <div class="hero-pill"><strong>Med spa native</strong> — built only for your industry</div>
-            <div class="hero-pill"><strong>24/7 response</strong> — under 1.5 seconds</div>
-            <div class="hero-pill"><strong>Intake to sheet</strong> — clean lead data in Google Sheets</div>
+          <div class="hero-bullets">
+            <div class="hero-badge"><strong>24/7</strong> instant response</div>
+            <div class="hero-badge"><strong>Med spa native</strong> messaging</div>
+            <div class="hero-badge"><strong>Google Sheet</strong> lead pipeline</div>
           </div>
-
           <div class="hero-cta-row">
-            <a class="btn-primary" href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener">
-              <span>Book a 15-min walkthrough</span> <span>↗</span>
+            <a href="#demo" class="btn btn-primary">
+              <span>Try the live demo</span>
+              <span>↗</span>
             </a>
-            <a class="btn-ghost" href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener">
-              <span class="icon">▶</span> <span>Watch the live demo</span>
+            <a href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener" class="btn btn-ghost">
+              <span>Book 15-min walkthrough</span>
             </a>
           </div>
-
           <div class="hero-footnote">
-            <span class="safe-dot"></span>
-            No long calls, no generic pitch. You see your own intake flow working in real-time — or we don’t work together.
+            <span>No pitch first.</span> You test the concierge with your own questions — then decide if we’re worth it.
           </div>
         </div>
 
-        <div class="hero-right">
+        <div class="hero-visual">
           <div class="hero-frame">
             <div class="hero-frame-header">
-              <span>Patient chat preview</span>
-              <span class="badge">Real-time AI intake</span>
+              <span>Live patient chat (example)</span>
+              <span class="hero-frame-badge">AI concierge · Swae</span>
             </div>
             <div class="hero-screen">
-              <div class="hero-overlay"></div>
+              <div class="hero-screen-overlay"></div>
               <div class="hero-chat">
                 <div class="bubble client">
-                  “Hi, do you have any openings for Botox next week? I’m also curious on pricing.”
+                  Hi! Do you have any openings for Botox next week? Also curious what you charge.
                 </div>
                 <div class="bubble ai">
-                  <strong>Swae:</strong> “Absolutely — we’d love to take care of you. Our Botox starts at $11/unit and most clients invest between $250–$450 per visit.<br><br>
-                  What area are you hoping to treat and what days work best? I’ll check your options now.”
+                  <strong>Swae:</strong> Absolutely — we’d love to take care of you. Our Botox starts at $11/unit and most clients invest $250–$450 per visit.<br><br>
+                  Which area are you treating and what days work best? I’ll check availability.
                 </div>
                 <div class="bubble client">
-                  “Forehead + frown lines. I’m free Tuesday or Thursday after 4 pm.”
+                  Forehead &amp; frown lines. I’m free Tue or Thu after 4 pm.
                 </div>
                 <div class="bubble ai">
-                  “Perfect. Last question — what’s your name, preferred contact, and best number? I’ll lock in times and send them straight to your phone.”
+                  Perfect. What’s your name and best cell number? I’ll reserve times and text them over.
                 </div>
               </div>
-              <div class="hero-status-row">
+              <div class="hero-status">
                 <div class="status-pill">
-                  <div class="status-pill-dot"></div>
-                  <span>Lead captured • Auto-logged to Google Sheet</span>
+                  <div class="status-dot"></div>
+                  <span>Lead captured — auto-logged to Google Sheet</span>
                 </div>
-                <div class="mini-metric">
-                  Response time <span>0.9s</span>
+                <div class="status-metric">
+                  Response time <span>&lt; 1.2s</span>
                 </div>
               </div>
             </div>
@@ -957,126 +1109,288 @@
         </div>
       </section>
 
-      <!-- WHY -->
-      <section class="section" id="why">
+      <!-- DEMO / PRODUCT -->
+      <section class="section" id="demo">
         <div class="section-inner">
-          <div class="section-label">Why med spas choose Swae Systems</div>
-          <h2 class="section-title">You spend money to get leads. We make sure none of them slip through.</h2>
+          <div class="section-label">Product</div>
+          <h2 class="section-title">See the concierge in action — not in a slide deck.</h2>
+          <div class="demo-grid">
+            <div class="demo-card">
+              <p class="demo-lead">
+                We don’t hide behind buzzwords. This is the same system you’ll run in your clinic — just pointed at our demo instead of your menu.
+              </p>
+              <ul class="demo-list">
+                <li>Answers Botox, filler, facial, and membership questions like a trained front desk.</li>
+                <li>Collects name, contact, treatment interest, and ideal time window in under 60 seconds.</li>
+                <li>Speaks in your tone: polished, luxury, and never “AI weird.”</li>
+                <li>Every qualified lead is dropped into your Google Sheet with clean columns.</li>
+              </ul>
+              <div class="demo-actions">
+                <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener" class="btn btn-primary">
+                  <span>Open full demo</span><span>↗</span>
+                </a>
+                <a href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener" class="btn btn-ghost">
+                  <span>Watch a live walkthrough</span>
+                </a>
+              </div>
+            </div>
+            <div class="demo-visual">
+              <div class="demo-visual-overlay"></div>
+              <div class="demo-visual-inner">
+                <div>
+                  <div class="demo-visual-top">
+                    Dashboard preview · <span style="color:var(--gold);">Med Spa Leads</span>
+                  </div>
+                  <div class="demo-visual-stat">
+                    Today: <span>18 new conversations</span> · <span>11 qualified leads</span>
+                  </div>
+                </div>
+                <div class="demo-visual-stat">
+                  Sheet fields: <span>Name · Phone · Email · Treatment · Time window · Source</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SWAE VS COMPETITORS -->
+      <section class="section" id="compare">
+        <div class="section-inner">
+          <div class="section-label">Swae vs Competitors</div>
+          <h2 class="section-title">Why med spas work with Swae instead of generic AI agencies.</h2>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="highlight">Swae Systems</th>
+                <th>Generic AI Agency</th>
+                <th>DIY Chatbot / Random Tool</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Niche</td>
+                <td><span class="pill-good">Med spa only</span></td>
+                <td>Dental, HVAC, gyms, “any local business”</td>
+                <td>No niche — you figure it out</td>
+              </tr>
+              <tr>
+                <td>Tone &amp; branding</td>
+                <td>Luxury script tuned to your spa’s voice</td>
+                <td>Generic templates and canned replies</td>
+                <td>You write every answer yourself</td>
+              </tr>
+              <tr>
+                <td>Channels</td>
+                <td>Website, SMS, IG DMs (designed to expand)</td>
+                <td>Mainly website, sometimes SMS add-ons</td>
+                <td>Depends on the tool — usually just web</td>
+              </tr>
+              <tr>
+                <td>Lead data</td>
+                <td>Structured Google Sheet, CRM-ready</td>
+                <td>Scattered chats, screenshots, exports</td>
+                <td>Manual copy/paste into your systems</td>
+              </tr>
+              <tr>
+                <td>Setup</td>
+                <td>Days — done-for-you by the builder</td>
+                <td>Weeks — onboard with account managers</td>
+                <td>Hours · days of your own time</td>
+              </tr>
+              <tr>
+                <td>Focus</td>
+                <td>Fill your calendar with qualified patients</td>
+                <td>Sell you complicated “AI packages”</td>
+                <td>Cheapest possible software</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PRODUCT DETAILS / FEATURES -->
+      <section class="section" id="product">
+        <div class="section-inner">
+          <div class="section-label">Engineered for luxury clinics</div>
+          <h2 class="section-title">Exactly what the concierge does for your med spa.</h2>
           <div class="grid-3">
             <div class="card">
-              <div class="card-pill">
-                <span class="dot-danger"></span> Missed calls & unread DMs
-              </div>
-              <h3>Every unanswered inquiry is a lost booking.</h3>
+              <div class="card-tag">24/7 front desk</div>
+              <h3>Instant answers, zero voicemails.</h3>
               <p>
-                Most med spas lose thousands per month because staff are busy in treatment rooms. Calls go to voicemail, DMs stack up, and “I’ll reply later” never happens. Our AI concierge replies instantly and turns those moments into booked consults.
+                Patients ask about pricing, availability, and treatments at all hours. The concierge replies in seconds, handles FAQs, and makes sure interested people don’t drift to another clinic.
               </p>
             </div>
             <div class="card">
-              <div class="card-pill">
-                <span class="dot-safe"></span> AI that speaks “med spa”
-              </div>
-              <h3>Trained to talk like your brand, not a robot.</h3>
+              <div class="card-tag">On-brand tone</div>
+              <h3>Speaks like your spa — not a robot.</h3>
               <p>
-                We collect your menu, pricing ranges, aftercare rules, and tone. The system explains Botox vs filler, pre/post-care, memberships, and promotions just like your best front desk — in any language your clients message in.
+                We load your menu, key offers, and tone so every response feels like a human from your front desk wrote it. Professional, warm, and crystal clear — English, Spanish, or both.
               </p>
             </div>
             <div class="card">
-              <div class="card-pill">
-                <span class="dot-safe"></span> Clean intake data in sheets
-              </div>
-              <h3>Names, numbers, treatment interest — all structured.</h3>
+              <div class="card-tag">Lead pipeline</div>
+              <h3>Clean intake into Google Sheets.</h3>
               <p>
-                Every conversation turns into a tidy row in your Google Sheet: name, phone, email, preferred treatment, time window, channel, and notes. Your team simply opens the sheet and confirms bookings instead of chasing scattered messages.
+                Name, phone, email, treatment interest, time window, and channel — logged into a lead sheet in real-time. Your team just opens the sheet and starts confirming bookings.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- HOW IT WORKS -->
-      <section class="section" id="how">
+      <!-- RESULTS / TESTIMONIAL STYLE -->
+      <section class="section" id="results">
         <div class="section-inner">
-          <div class="section-label">How it works</div>
-          <h2 class="section-title">From first “Hi” to a fully qualified lead — in under 60 seconds.</h2>
-          <div class="how-grid">
-            <div>
-              <div class="steps">
-                <div class="step">
-                  <div class="step-number">1</div>
-                  <div class="step-body">
-                    <h3>We plug into your existing flow.</h3>
-                    <p>
-                      Website chat, Instagram DMs, SMS — wherever patients already reach out. We connect your AI concierge so it starts answering within seconds, 24/7, even when your team is home with their families.
-                    </p>
-                  </div>
-                </div>
-                <div class="step">
-                  <div class="step-number">2</div>
-                  <div class="step-body">
-                    <h3>It pre-qualifies and collects intake.</h3>
-                    <p>
-                      The system asks the same questions your front desk would: treatment interest, goals, availability, budget range, and basic medical pre-screens. All saved as structured data, not messy screenshots.
-                    </p>
-                  </div>
-                </div>
-                <div class="step">
-                  <div class="step-number">3</div>
-                  <div class="step-body">
-                    <h3>The lead drops into your Google Sheet.</h3>
-                    <p>
-                      Each new lead is sent straight into a shared Google Sheet. Your coordinator starts the day with a list of warm, ready-to-book patients instead of digging through DMs and missed call logs.
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div class="section-label">Results</div>
+          <h2 class="section-title">What this actually feels like in a busy med spa.</h2>
+          <div class="results-grid">
+            <div class="quote">
+              <div class="quote-stars">★★★★★</div>
+              “We used to have unread DMs every Monday. Now they’re already answered and pre-qualified. My coordinator starts the day with a list of warm leads instead of digging for messages.”
+              <strong>Practice manager · multi-provider med spa</strong>
             </div>
-
-            <aside class="how-card">
-              <div class="how-card-inner">
-                <div class="how-card-title">Example: “New Botox lead — Instagram DM”</div>
-                <div class="mini-row">
-                  <span>Source</span>
-                  <span class="value">Instagram → AI Concierge</span>
-                </div>
-                <div class="mini-row">
-                  <span>Fields captured</span>
-                  <span class="value">Name · Phone · Email · Treatment · Time window</span>
-                </div>
-                <div class="mini-row">
-                  <span>Destination</span>
-                  <span class="value">Med Spa Leads — Google Sheet</span>
-                </div>
-                <div class="mini-row">
-                  <span>Owner sees it</span>
-                  <span class="value">In seconds, not days</span>
-                </div>
-              </div>
-            </aside>
+            <div class="quote">
+              <div class="quote-stars">★★★★★</div>
+              “The AI sounds more put together than some front desk hires we’ve had. Patients get instant answers and we don’t lose people just because we’re in the treatment room.”
+              <strong>Owner · boutique injectables clinic</strong>
+            </div>
+            <div class="quote">
+              <div class="quote-stars">★★★★★</div>
+              “The best part is the sheet. I can literally see where every lead came from and what they asked for. It finally feels like a real system instead of random texts.”
+              <strong>Director · laser &amp; skin center</strong>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- CONTACT -->
+      <!-- PRICING -->
+      <section class="section" id="pricing">
+        <div class="section-inner">
+          <div class="section-label">Pricing</div>
+          <h2 class="section-title">Built for clinics that value their time more than another software login.</h2>
+          <div class="pricing-grid">
+            <div class="tier">
+              <div class="tier-label">Starter</div>
+              <div class="tier-name">Single-location med spa</div>
+              <div class="tier-price">From $1,500 / month</div>
+              <ul>
+                <li>24/7 concierge for website chat + basic SMS</li>
+                <li>Core treatment FAQ + pricing ranges loaded</li>
+                <li>Google Sheet lead pipeline set up for you</li>
+                <li>No contracts — pause if it doesn’t earn its keep</li>
+              </ul>
+              <div class="tier-footer">
+                <a href="https://calendly.com/your-calendly-link/medspa-demo" class="btn btn-ghost" target="_blank" rel="noopener">
+                  <span>Talk about Starter</span>
+                </a>
+              </div>
+            </div>
+            <div class="tier highlight">
+              <div class="tier-label">Growth</div>
+              <div class="tier-name">High-volume clinics</div>
+              <div class="tier-price">From $2,500 / month</div>
+              <ul>
+                <li>Optimized flows for injectables, facials, and memberships</li>
+                <li>Deeper pre-qualification and appointment handoff flows</li>
+                <li>Priority updates as your menu and offers change</li>
+                <li>Designed to support 2–3 providers comfortably</li>
+              </ul>
+              <div class="tier-footer">
+                <a href="#contact" class="btn btn-primary">
+                  <span>See if Growth fits your clinic</span>
+                </a>
+              </div>
+            </div>
+            <div class="tier">
+              <div class="tier-label">Multi-location</div>
+              <div class="tier-name">Groups &amp; expansion</div>
+              <div class="tier-price">Custom retainers</div>
+              <ul>
+                <li>Routing logic for multiple locations / providers</li>
+                <li>Shared reporting on leads across all clinics</li>
+                <li>Deeper collaboration on campaigns &amp; launches</li>
+                <li>Built to grow with your footprint</li>
+              </ul>
+              <div class="tier-footer">
+                <a href="#contact" class="btn btn-ghost">
+                  <span>Discuss a custom build</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <div class="section-inner">
+          <div class="section-label">Q&amp;A</div>
+          <h2 class="section-title">Questions your team will probably ask you.</h2>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-q">
+                <span>Is this HIPAA-aware? Are we sending medical info into some random bot?</span>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-a">
+                We design flows to keep sensitive medical details off insecure channels. The concierge can answer treatment questions and collect basic intake, then hand off to your existing systems for anything clinical. If you prefer, we can avoid PHI entirely and focus only on lead capture and booking.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span>How fast can this actually be live on our site?</span>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-a">
+                Once we have your menu, tone, and key rules, a first version can be running in days — not months. We iterate with your team based on real conversations until it feels like an extension of your front desk.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span>Where do the leads go? Who sees them?</span>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-a">
+                Every qualified lead lands in a shared Google Sheet with clean columns: name, contact details, treatment interest, time window, and channel. Your coordinator checks that sheet, follows up, and confirms bookings. No more guessing where a DM went.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span>Will this replace my front desk team?</span>
+                <div class="faq-toggle">+</div>
+              </div>
+              <div class="faq-a">
+                No. It removes repetitive back-and-forth so your team can focus on in-clinic experience and high-value conversations. Think of it as the assistant that never sleeps and never gets tired of answering “how much is Botox?” for the hundredth time.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT / FINAL CTA -->
       <section class="section" id="contact">
         <div class="section-inner">
           <div class="section-label">Next steps</div>
-          <h2 class="section-title">See your own med spa’s flow running in real-time.</h2>
-
+          <h2 class="section-title">If you’re already losing leads, this pays for itself quickly.</h2>
           <div class="contact-grid">
             <div class="contact-card">
               <p>
-                We don’t do generic sales calls. On your 15-minute walkthrough, we plug in a simple version of your menu, show you how the AI concierge talks to your patients, and how every lead lands inside your Google Sheet.
+                If you’re seeing unread DMs, missed calls, or “sorry we’re closed” messages on your clinic’s phone, you’re already paying the price. The question is whether you want a system watching those channels for you.
               </p>
               <div class="contact-lines">
                 <div>📞 Call / Text: <a href="tel:12096408636">+1 (209) 640-8636</a></div>
                 <div>📧 Email: <a href="mailto:swaesystems.ai@gmail.com">swaesystems.ai@gmail.com</a></div>
-                <div>🗓 Book directly: <a href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener">Calendly — Med Spa AI Demo</a></div>
+                <div>🗓 Demo: <a href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener">Book a 15-min med spa AI walkthrough</a></div>
               </div>
+              <p class="contact-note">
+                No pressure, no “agency talk.” You’ll see your version of the concierge running — if it doesn’t feel like a cheat code, we don’t move forward.
+              </p>
             </div>
-
             <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-              <h3>Prefer a quick form? Share your details.</h3>
+              <h3>Prefer we reach out first?</h3>
               <div class="form-grid">
                 <div>
                   <label for="name">Your name</label>
@@ -1095,29 +1409,25 @@
                   <input id="email" name="email" type="email" placeholder="you@yourclinic.com" required />
                 </div>
               </div>
-
               <div class="form-row-full">
-                <label for="focus">What do you want the AI to handle first?</label>
+                <label for="focus">What should the concierge handle first?</label>
                 <select id="focus" name="focus">
                   <option value="">Select an option</option>
-                  <option value="missed-calls">Missed calls & voicemails</option>
-                  <option value="instagram-dms">Instagram DMs & inquiries</option>
-                  <option value="website-chat">Website chat & after-hours traffic</option>
-                  <option value="all-of-the-above">All of the above</option>
+                  <option value="missed-calls">Missed calls &amp; voicemails</option>
+                  <option value="instagram-dms">Instagram DMs &amp; late-night inquiries</option>
+                  <option value="website-chat">Website chat / after-hours traffic</option>
+                  <option value="all">All of the above</option>
                 </select>
               </div>
-
               <div class="form-row-full">
-                <label for="notes">Anything you want us to know?</label>
-                <textarea id="notes" name="notes" placeholder="We get a lot of Botox + filler inquiries after 6 pm. We just need someone to respond and pre-qualify them."></textarea>
+                <label for="notes">Anything else we should know?</label>
+                <textarea id="notes" name="notes" placeholder="We’re busy in rooms and don’t have time to reply to every DM, but we know there’s money there."></textarea>
               </div>
-
-              <button type="submit" class="btn-primary btn-form">
-                <span>Submit &amp; get a walkthrough link</span>
+              <button type="submit" class="btn btn-primary btn-form">
+                <span>Send details · get a custom demo link</span>
               </button>
-
               <div class="form-footnote">
-                <span>Note:</span> We keep intake flows HIPAA-aware and can avoid PHI in chat if you prefer. This form is for demo purposes only.
+                <span>Note:</span> This form is for scheduling and demo access only. We keep your flows HIPAA-aware and never share your clinic data.
               </div>
             </form>
           </div>
@@ -1127,11 +1437,12 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-      <div class="footer-row">
+      <div class="footer-inner">
         <div>© <span id="year"></span> Swae Systems. 24/7 AI concierge for med spas.</div>
         <div class="footer-links">
-          <a href="#why">Why med spas</a>
-          <a href="#how">How it works</a>
+          <a href="#demo">Product</a>
+          <a href="#compare">Swae vs Others</a>
+          <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </div>
       </div>
@@ -1139,8 +1450,7 @@
   </div>
 
   <!-- CHAT WIDGET PLACEHOLDER (BOTPRESS / BOTPRESS WEBCHAT) -->
-  <!-- Replace this with your real Botpress webchat script -->
-  <!--
+  <!-- Replace with your real Botpress script when ready
   <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
   <script>
     window.botpressWebChat.init({
@@ -1149,14 +1459,13 @@
       messagingUrl: "https://api.botpress.cloud",
       clientId: "YOUR_CLIENT_ID",
       botName: "Swae Med Spa Concierge",
-      containerWidth: "420px",
       hideWidget: false
     });
   </script>
   -->
 
   <script>
-    // Footer year
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
 
     // Mobile nav
@@ -1169,13 +1478,21 @@
     }
 
     burger.addEventListener("click", () => {
-      const isOpen = burger.classList.contains("open");
-      if (isOpen) {
+      const open = burger.classList.contains("open");
+      if (open) {
         closeMobileNav();
       } else {
         burger.classList.add("open");
         navMobile.style.display = "block";
       }
+    });
+
+    // FAQ toggle
+    document.querySelectorAll(".faq-item").forEach((item) => {
+      const q = item.querySelector(".faq-q");
+      q.addEventListener("click", () => {
+        item.classList.toggle("open");
+      });
     });
   </script>
 </body>
