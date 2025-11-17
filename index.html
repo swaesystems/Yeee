@@ -1,47 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Swae Systems — Med Spa Automation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Swae Systems builds HIPAA-aware AI automation for med spas and aesthetic clinics. 24/7 intake, booking, and follow-ups across every channel." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swae Systems — 24/7 AI Concierge for Med Spas</title>
+  <meta name="description" content="Swae Systems builds 24/7 AI concierges for med spas. We answer every DM, text, and website chat instantly, collect full intake, and book appointments while your team sleeps." />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 
   <style>
     :root {
-      --bg-main: #050505;
-      --bg-alt: #101010;
-      --bg-soft: #141414;
-      --gold: #f5c76b;
-      --gold-soft: rgba(245, 199, 107, 0.12);
-      --text-main: #f7f7f7;
-      --text-muted: #a3a3a3;
-      --border-soft: #262626;
-      --error: #f97373;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.65);
-      --max-width: 1120px;
-      --transition-fast: 180ms ease-out;
+      --bg-deep: #020308;
+      --bg-soft: #080910;
+      --accent: #f5c56b;
+      --accent-soft: rgba(245, 197, 107, 0.16);
+      --text-main: #ffffff;
+      --text-dim: #b3b3b3;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --danger: #ff5c5c;
+      --safe: #4ade80;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-    }
-
-    html, body {
-      background: radial-gradient(circle at top, #151515 0, #020202 55%);
-      color: var(--text-main);
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      scroll-behavior: smooth;
+      box-sizing: border-box;
     }
 
     body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #141414 0, #020308 45%, #000 100%);
+      color: var(--text-main);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
@@ -54,1316 +47,1136 @@
       display: block;
     }
 
-    /* Layout */
     .page {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    /* Navbar */
-    .navbar {
-      position: sticky;
+    /* NAV */
+    .nav {
+      position: fixed;
       top: 0;
-      z-index: 40;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
-      border-bottom: 1px solid rgba(245, 199, 107, 0.12);
-    }
-
-    .navbar-inner {
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 1.1rem 7vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.85rem 1.25rem;
-      gap: 1.25rem;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2, 3, 8, 0.92), rgba(2, 3, 8, 0.75), transparent);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
-    .brand {
+    .nav-left {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.75rem;
     }
 
-    .brand-mark {
-      width: 32px;
-      height: 32px;
+    .logo-mark {
+      width: 36px;
+      height: 36px;
       border-radius: 999px;
-      border: 1px solid rgba(245, 199, 107, 0.6);
-      background: radial-gradient(circle at 30% 0, #f5c76b, #221300);
+      border: 1px solid rgba(245, 197, 107, 0.5);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 30px rgba(245, 199, 107, 0.6);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-name {
+      background:
+        radial-gradient(circle at 0 0, rgba(245, 197, 107, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(245, 197, 107, 0.18), transparent 55%),
+        #020308;
+      box-shadow:
+        0 0 22px rgba(245, 197, 107, 0.24),
+        inset 0 0 12px rgba(0, 0, 0, 0.8);
       font-family: "Playfair Display", serif;
       font-size: 1.1rem;
-      letter-spacing: 0.12em;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .logo-text-main {
+      font-family: "Playfair Display", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .brand-tagline {
-      font-size: 0.72rem;
-      color: var(--text-muted);
+    .logo-text-sub {
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
+      color: var(--text-dim);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
-      font-size: 0.86rem;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-dim);
     }
 
-    .nav-link {
+    .nav-links a {
       position: relative;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.7rem;
-      padding-bottom: 0.1rem;
-      cursor: pointer;
+      padding-bottom: 0.15rem;
     }
 
-    .nav-link::after {
+    .nav-links a::after {
       content: "";
       position: absolute;
       left: 0;
       bottom: 0;
-      height: 1px;
       width: 0;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      transition: width var(--transition-fast);
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.26s ease;
     }
 
-    .nav-link:hover {
-      color: var(--text-main);
-    }
-
-    .nav-link:hover::after {
+    .nav-links a:hover::after {
       width: 100%;
     }
 
     .nav-cta {
-      padding: 0.55rem 1.1rem;
+      padding: 0.45rem 1.1rem;
       border-radius: 999px;
-      border: 1px solid rgba(245, 199, 107, 0.65);
-      background: radial-gradient(circle at 0 0, rgba(245, 199, 107, 0.12), transparent);
-      color: var(--gold);
-      font-size: 0.74rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
+      border: 1px solid rgba(245, 197, 107, 0.6);
+      background: radial-gradient(circle at top left, rgba(245, 197, 107, 0.25), rgba(2, 3, 8, 0.9));
+      font-size: 0.85rem;
       text-transform: uppercase;
-      display: inline-flex;
+      letter-spacing: 0.14em;
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      transition: all var(--transition-fast);
+      gap: 0.4rem;
     }
 
-    .nav-cta:hover {
-      background: rgba(245, 199, 107, 0.14);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
-    }
-
-    .nav-cta span {
+    .nav-cta span:last-child {
       font-size: 0.9rem;
     }
 
-    .nav-burger {
-      display: none;
-      width: 32px;
-      height: 32px;
+    /* Burger */
+    .burger {
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
-      border: 1px solid rgba(245, 199, 107, 0.45);
-      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      display: none;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      background: rgba(0, 0, 0, 0.55);
     }
 
-    .nav-burger-line {
+    .burger-inner {
       width: 16px;
-      height: 1.5px;
-      background: var(--gold);
+      height: 12px;
       position: relative;
     }
 
-    .nav-burger-line::before,
-    .nav-burger-line::after {
-      content: "";
+    .burger-line {
       position: absolute;
-      width: 16px;
-      height: 1.5px;
-      background: var(--gold);
       left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 99px;
+      background: #ffffff;
+      transition: transform 0.26s ease, opacity 0.26s ease, top 0.26s ease, bottom 0.26s ease;
     }
 
-    .nav-burger-line::before {
-      top: -4px;
+    .burger-line:nth-child(1) { top: 0; }
+    .burger-line:nth-child(2) { top: 5px; }
+    .burger-line:nth-child(3) { bottom: 0; }
+
+    .burger.open .burger-line:nth-child(1) {
+      top: 5px;
+      transform: rotate(45deg);
     }
 
-    .nav-burger-line::after {
-      top: 4px;
+    .burger.open .burger-line:nth-child(2) {
+      opacity: 0;
     }
 
-    .nav-menu-mobile {
+    .burger.open .burger-line:nth-child(3) {
+      bottom: 5px;
+      transform: rotate(-45deg);
+    }
+
+    .nav-mobile {
       display: none;
-      flex-direction: column;
-      gap: 0.65rem;
-      padding: 0 1.25rem 1rem;
-      background: rgba(0, 0, 0, 0.96);
-      border-bottom: 1px solid rgba(245, 199, 107, 0.12);
+      position: fixed;
+      top: 64px;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 7vw 1.75rem;
+      background: radial-gradient(circle at top, #0b0b0b, #020308 55%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 40;
     }
 
-    .nav-menu-mobile a {
-      font-size: 0.8rem;
+    .nav-mobile-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .nav-mobile-inner a {
+      font-size: 0.95rem;
+      color: var(--text-dim);
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--text-muted);
     }
 
-    .nav-menu-mobile a:hover {
-      color: var(--gold);
-    }
-
-    /* Sections */
-    main {
-      flex: 1;
-    }
-
-    section {
-      padding: 3.5rem 0;
-    }
-
-    .section {
-      padding: 3.5rem 1.25rem;
-    }
-
-    .section-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    .section-header {
-      margin-bottom: 2.25rem;
-    }
-
-    .eyebrow {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      margin-bottom: 0.65rem;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.9rem;
-      letter-spacing: 0.04em;
-    }
-
-    .section-subtitle {
+    .nav-mobile-inner .nav-cta {
+      width: fit-content;
       margin-top: 0.5rem;
-      max-width: 460px;
-      font-size: 0.92rem;
-      color: var(--text-muted);
     }
 
-    /* Hero */
-    #hero {
-      padding: 3.75rem 1.25rem 3.5rem;
-    }
-
-    .hero-grid {
+    /* HERO */
+    .hero {
+      padding: 7.5rem 7vw 4rem;
+      min-height: 100vh;
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 2.5rem;
+      gap: 3rem;
       align-items: center;
     }
 
-    .hero-kicker {
+    .hero-left {
+      max-width: 580px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.9rem 0.25rem 0.3rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: radial-gradient(circle at left, rgba(245, 197, 107, 0.28), transparent 55%);
       font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      color: var(--gold);
-      margin-bottom: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-tag-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--accent), transparent 70%);
+      box-shadow: 0 0 18px rgba(245, 197, 107, 0.7);
     }
 
     .hero-title {
       font-family: "Playfair Display", serif;
-      font-size: 2.3rem;
-      line-height: 1.1;
-      margin-bottom: 0.9rem;
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      line-height: 1.12;
+      margin-bottom: 1rem;
     }
 
-    .hero-subtitle {
-      color: var(--text-muted);
+    .hero-title span.gold {
+      color: var(--accent);
+    }
+
+    .hero-sub {
       font-size: 0.98rem;
-      max-width: 420px;
-      margin-bottom: 1.4rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
     }
 
     .hero-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-pill {
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 8, 12, 0.9);
+      color: var(--text-dim);
+    }
+
+    .hero-pill strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
       margin-bottom: 1.6rem;
     }
 
-    .pill {
+    .btn-primary {
+      padding: 0.7rem 1.4rem;
       border-radius: 999px;
-      border: 1px solid rgba(245, 199, 107, 0.4);
-      background: rgba(0, 0, 0, 0.7);
-      padding: 0.3rem 0.75rem;
-      font-size: 0.7rem;
+      border: 1px solid rgba(245, 197, 107, 0.9);
+      background: radial-gradient(circle at top left, rgba(245, 197, 107, 0.35), rgba(2, 3, 8, 0.98));
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-    }
-
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.9rem;
-      align-items: center;
-      margin-bottom: 1.4rem;
-    }
-
-    .btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 0.5rem;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      border: 1px solid transparent;
       cursor: pointer;
-      transition: all var(--transition-fast);
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at 0 0, #f5c76b, #7c5a1d);
-      color: #050505;
-      border-color: rgba(245, 199, 107, 0.9);
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.9);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.95);
+      box-shadow: 0 0 30px rgba(245, 197, 107, 0.5);
     }
 
     .btn-ghost {
-      background: rgba(0, 0, 0, 0.4);
-      color: var(--gold);
-      border-color: rgba(245, 199, 107, 0.55);
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(8, 8, 12, 0.9);
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      color: var(--text-dim);
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-ghost span.icon {
+      font-size: 1.15rem;
     }
 
     .btn-ghost:hover {
-      background: rgba(245, 199, 107, 0.12);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75);
+      border-color: rgba(255, 255, 255, 0.55);
+      color: var(--text-main);
+      background: rgba(15, 15, 21, 0.98);
     }
 
-    .hero-note {
-      font-size: 0.78rem;
-      color: var(--text-muted);
+    .hero-footnote {
+      font-size: 0.75rem;
+      color: var(--text-dim);
     }
 
-    .hero-note strong {
-      color: var(--gold);
-      font-weight: 500;
+    .hero-footnote span.safe-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--safe);
+      margin-right: 0.35rem;
     }
 
-    .hero-media {
+    .hero-right {
       position: relative;
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .hero-card {
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at 0 0, rgba(245, 199, 107, 0.18), #050505);
-      border: 1px solid rgba(245, 199, 107, 0.32);
-      padding: 1.1rem;
-      box-shadow: var(--shadow-soft);
+    .hero-frame {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 9 / 16;
+      border-radius: 32px;
+      padding: 0.85rem;
+      background: radial-gradient(circle at top, #161616, #050509);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow:
+        0 0 0 1px rgba(245, 197, 107, 0.06),
+        0 30px 80px rgba(0, 0, 0, 0.9);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .hero-frame-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-frame-header span.badge {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 197, 107, 0.6);
+      background: rgba(245, 197, 107, 0.12);
+      color: var(--accent);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     .hero-screen {
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      flex: 1;
+      border-radius: 24px;
+      padding: 0.9rem;
+      background-image: url("hero-spa.PNG");
+      background-size: cover;
+      background-position: center;
+      position: relative;
       overflow: hidden;
-      background: #050505;
     }
 
-    .hero-screen img {
-      width: 100%;
-      height: auto;
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(2, 3, 8, 0.96), rgba(2, 3, 8, 0.06));
     }
 
-    .hero-label {
-      margin-top: 0.75rem;
+    .hero-chat {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 2.1rem;
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 0.5rem 0.7rem;
+      border-radius: 14px;
+      font-size: 0.7rem;
+      line-height: 1.45;
+    }
+
+    .bubble.client {
+      align-self: flex-start;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .bubble.ai {
+      align-self: flex-end;
+      background: rgba(245, 197, 107, 0.16);
+      border: 1px solid rgba(245, 197, 107, 0.7);
+    }
+
+    .bubble.ai strong {
+      color: var(--accent);
+    }
+
+    .hero-status-row {
+      position: relative;
+      margin-top: 0.8rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      font-size: 0.68rem;
+      color: var(--text-dim);
     }
 
-    .hero-label span:first-child {
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-      font-size: 0.7rem;
-    }
-
-    .hero-mini-metrics {
-      display: flex;
-      gap: 0.85rem;
-      margin-top: 0.7rem;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .hero-metric strong {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .hero-orbit {
-      position: absolute;
-      inset: auto auto -1.8rem -1.1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(245, 199, 107, 0.35);
-      background: rgba(0, 0, 0, 0.95);
-      padding: 0.55rem 0.9rem;
+    .status-pill {
       display: inline-flex;
-      flex-direction: column;
-      gap: 0.1rem;
-      font-size: 0.7rem;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.95);
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
-    .hero-orbit-label {
+    .status-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--safe);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    .mini-metric {
+      font-size: 0.63rem;
+      opacity: 0.9;
+    }
+
+    .mini-metric span {
+      color: var(--accent);
+    }
+
+    /* SECTION WRAP */
+    .section {
+      padding: 3.5rem 7vw 1.5rem;
+    }
+
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      font-size: 0.62rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
     }
 
-    .hero-orbit-main {
-      font-size: 0.82rem;
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.6rem;
+      margin-bottom: 1.6rem;
     }
 
-    /* System / What we fix / What we do */
-    .section-dark {
-      background: radial-gradient(circle at top, #141414 0, #050505 55%);
-      border-top: 1px solid rgba(245, 199, 107, 0.12);
-      border-bottom: 1px solid rgba(245, 199, 107, 0.1);
-    }
-
-    .two-col {
+    /* 3 columns “Why med spas use us” */
+    .grid-3 {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 2.25rem;
-      align-items: flex-start;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.8rem;
     }
 
     .card {
-      border-radius: var(--radius-lg);
-      background: rgba(7, 7, 7, 0.9);
+      border-radius: 18px;
       border: 1px solid var(--border-soft);
-      padding: 1.4rem;
+      background: radial-gradient(circle at top, rgba(245, 197, 107, 0.07), rgba(8, 8, 12, 0.96));
+      padding: 1.4rem 1.2rem;
     }
 
-    .card-ghost {
-      background: rgba(5, 5, 5, 0.6);
+    .card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.55rem;
     }
 
-    .card-label {
-      font-size: 0.74rem;
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .card-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--gold);
-      margin-bottom: 0.45rem;
     }
 
-    .card-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-text {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 0.9rem;
-    }
-
-    .chip-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .chip {
-      padding: 0.3rem 0.65rem;
+    .card-pill span.dot-danger {
+      width: 6px;
+      height: 6px;
       border-radius: 999px;
-      background: rgba(245, 199, 107, 0.12);
-      border: 1px solid rgba(245, 199, 107, 0.25);
-      font-size: 0.7rem;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      background: var(--danger);
+      box-shadow: 0 0 8px rgba(248, 113, 113, 0.8);
     }
 
-    .bullet-grid {
+    .card-pill span.dot-safe {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--safe);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+    }
+
+    /* HOW IT WORKS */
+    .how-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.1rem;
-      margin-top: 0.6rem;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 2.4rem;
+      align-items: flex-start;
     }
 
-    .bullet {
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .step {
       display: flex;
       gap: 0.75rem;
       align-items: flex-start;
-      font-size: 0.86rem;
     }
 
-    .bullet-dot {
-      width: 9px;
-      height: 9px;
+    .step-number {
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
-      background: radial-gradient(circle, var(--gold), #805c1d);
-      margin-top: 0.25rem;
-    }
-
-    .bullet-title {
-      font-weight: 500;
-      margin-bottom: 0.15rem;
-    }
-
-    .bullet-text {
-      color: var(--text-muted);
-      font-size: 0.82rem;
-    }
-
-    /* Results section */
-    .cards-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.3rem;
-    }
-
-    .result-pill {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--gold);
-      margin-bottom: 0.4rem;
-    }
-
-    .result-number {
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
-    }
-
-    .result-text {
-      color: var(--text-muted);
-      font-size: 0.86rem;
-    }
-
-    .before-after {
-      margin-top: 2.2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.1rem;
-    }
-
-    .before-after-card {
-      padding: 1rem 1.1rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-soft);
-      background: rgba(5, 5, 5, 0.85);
-      font-size: 0.86rem;
-    }
-
-    .before-tag {
-      color: var(--error);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.7rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .after-tag {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.7rem;
-      margin-bottom: 0.4rem;
-    }
-
-    ul.simple-list {
-      margin-left: 1rem;
-      margin-top: 0.25rem;
-      color: var(--text-muted);
-      font-size: 0.84rem;
-    }
-
-    ul.simple-list li + li {
-      margin-top: 0.15rem;
-    }
-
-    /* Security / HIPAA */
-    .security-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .security-badges {
+      border: 1px solid rgba(245, 197, 107, 0.8);
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.8rem;
-    }
-
-    .security-pill {
-      border-radius: 999px;
-      padding: 0.3rem 0.65rem;
-      border: 1px solid rgba(245, 199, 107, 0.3);
-      background: rgba(0, 0, 0, 0.7);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-    }
-
-    .security-note {
-      margin-top: 0.9rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .security-note strong {
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .security-media {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(245, 199, 107, 0.32);
-      background: radial-gradient(circle at 10% 0, rgba(245, 199, 107, 0.18), #050505);
-      padding: 1.1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .security-media img {
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    /* Demo */
-    .demo-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.05fr);
-      gap: 2.1rem;
       align-items: center;
-    }
-
-    .demo-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
+      justify-content: center;
       font-size: 0.8rem;
-      color: var(--gold);
-      margin-top: 0.7rem;
+      color: var(--accent);
     }
 
-    .demo-link span {
-      font-size: 0.9rem;
+    .step-body h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.25rem;
     }
 
-    .demo-screen {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(245, 199, 107, 0.25);
-      background: radial-gradient(circle at 0 0, rgba(245, 199, 107, 0.14), #050505);
-      padding: 0.9rem;
-      box-shadow: var(--shadow-soft);
+    .step-body p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.6;
     }
 
-    /* Contact */
+    .how-card {
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      background:
+        radial-gradient(circle at top, rgba(245, 197, 107, 0.07), rgba(8, 8, 12, 0.96)),
+        url("owner-dashboard.PNG");
+      background-size: cover;
+      background-position: center;
+      padding: 1.2rem;
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .how-card-inner {
+      background: linear-gradient(to top, rgba(2, 3, 8, 0.94), rgba(2, 3, 8, 0.86));
+      border-radius: 14px;
+      padding: 1rem;
+    }
+
+    .how-card-title {
+      font-size: 0.94rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .mini-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .mini-row span.value {
+      color: var(--accent);
+    }
+
+    /* CONTACT */
     .contact-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 2rem;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.4rem;
+      align-items: flex-start;
     }
 
     .contact-card {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(245, 199, 107, 0.35);
-      background: radial-gradient(circle at 0 0, rgba(245, 199, 107, 0.18), #050505);
-      padding: 1.4rem;
-      box-shadow: var(--shadow-soft);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      background: radial-gradient(circle at top, rgba(245, 197, 107, 0.08), rgba(8, 8, 12, 0.96));
+      padding: 1.6rem 1.4rem;
+    }
+
+    .contact-card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
     }
 
     .contact-lines {
-      margin-top: 0.7rem;
-      font-size: 0.86rem;
-    }
-
-    .contact-lines p + p {
-      margin-top: 0.4rem;
-    }
-
-    .contact-label {
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .contact-value {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
       font-size: 0.9rem;
     }
 
-    .contact-value a {
-      color: var(--gold);
+    .contact-lines a {
+      color: var(--accent);
     }
 
-    .cta-bottom {
-      margin-top: 1.1rem;
-      font-size: 0.82rem;
-      color: var(--text-muted);
+    .contact-form {
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      background: rgba(8, 8, 12, 0.96);
+      padding: 1.4rem 1.3rem;
     }
 
-    .cta-bottom strong {
-      color: var(--gold);
-      font-weight: 500;
+    .contact-form h3 {
+      font-size: 1rem;
+      margin-bottom: 0.9rem;
     }
 
-    .contact-secondary {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+    .form-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.8rem;
     }
 
-    .contact-secondary ul {
-      margin-left: 1rem;
-      margin-top: 0.4rem;
+    .form-row-full {
+      margin-top: 0.8rem;
     }
 
-    .contact-secondary li + li {
-      margin-top: 0.15rem;
+    label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 0.25rem;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(245, 199, 107, 0.18);
-      padding: 1.1rem 1.25rem 1.5rem;
-      background: #020202;
+    input, select, textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(4, 4, 8, 0.95);
+      color: var(--text-main);
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #555;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-footnote {
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: var(--text-dim);
+      margin-top: 0.6rem;
     }
 
-    .footer-inner {
-      max-width: var(--max-width);
+    .form-footnote span {
+      color: var(--accent);
+    }
+
+    .btn-form {
+      margin-top: 0.9rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 1.8rem 7vw 2.2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .footer-row {
+      max-width: 1080px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    .footer-right {
+    .footer-links {
       display: flex;
-      gap: 0.9rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
     }
 
-    .footer-right span {
-      white-space: nowrap;
+    .footer-links a {
+      color: var(--text-dim);
     }
 
-    /* Responsive */
-    @media (max-width: 880px) {
-      .hero-grid,
-      .two-col,
-      .security-grid,
-      .demo-layout,
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 7rem;
+      }
+      .hero-right {
+        order: -1;
+      }
+      .hero-left {
+        max-width: 100%;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .how-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
       .contact-grid {
         grid-template-columns: minmax(0, 1fr);
       }
+    }
 
-      .hero-grid {
-        gap: 2rem;
-      }
-
-      .hero-orbit {
-        position: static;
-        margin-top: 0.8rem;
-      }
-
-      .navbar-inner {
-        padding-inline: 1rem;
-      }
-
+    @media (max-width: 768px) {
       .nav-links {
         display: none;
       }
-
-      .nav-burger {
-        display: inline-flex;
-      }
-
-      .nav-menu-mobile {
-        display: none;
-      }
-
-      .nav-menu-mobile.open {
+      .burger {
         display: flex;
       }
-
-      #hero {
-        padding-top: 3rem;
+      .section {
+        padding-inline: 6vw;
       }
-    }
-
-    @media (max-width: 520px) {
-      .hero-title {
-        font-size: 1.9rem;
+      .hero {
+        padding-inline: 6vw;
       }
-
-      .section-title {
-        font-size: 1.6rem;
-      }
-
-      .hero-ctas {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
+      .form-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
     }
   </style>
 </head>
 <body>
-<div class="page">
-
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="navbar-inner container">
-      <div class="brand">
-        <div class="brand-mark">SS</div>
-        <div class="brand-text">
-          <div class="brand-name">Swae Systems</div>
-          <div class="brand-tagline">Med Spa Automation</div>
+  <div class="page">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo-mark">S</div>
+        <div class="logo-text-wrap">
+          <div class="logo-text-main">Swae Systems</div>
+          <div class="logo-text-sub">Med Spa AI Concierge</div>
         </div>
       </div>
-
       <nav class="nav-links">
-        <a href="#hero" class="nav-link">Home</a>
-        <a href="#system" class="nav-link">System</a>
-        <a href="#results" class="nav-link">Results</a>
-        <a href="#security" class="nav-link">Security</a>
-        <a href="#demo" class="nav-link">Demo</a>
-        <a href="#contact" class="nav-cta">
-          <span>●</span>
-          Book Audit
+        <a href="#why">Why Med Spas Choose Us</a>
+        <a href="#how">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener" class="nav-cta">
+          <span>●</span><span>Live Demo</span>
         </a>
       </nav>
+      <div class="burger" id="burger">
+        <div class="burger-inner">
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+          <div class="burger-line"></div>
+        </div>
+      </div>
+    </header>
 
-      <button class="nav-burger" aria-label="Open navigation" onclick="toggleMobileMenu()">
-        <div class="nav-burger-line"></div>
-      </button>
+    <!-- MOBILE NAV -->
+    <div class="nav-mobile" id="nav-mobile">
+      <div class="nav-mobile-inner">
+        <a href="#why" onclick="closeMobileNav()">Why Med Spas Choose Us</a>
+        <a href="#how" onclick="closeMobileNav()">How It Works</a>
+        <a href="#contact" onclick="closeMobileNav()">Contact</a>
+        <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener" class="nav-cta">
+          <span>●</span><span>View Live Demo</span>
+        </a>
+      </div>
     </div>
 
-    <div id="nav-mobile" class="nav-menu-mobile">
-      <a href="#hero" onclick="toggleMobileMenu()">Home</a>
-      <a href="#system" onclick="toggleMobileMenu()">System</a>
-      <a href="#results" onclick="toggleMobileMenu()">Results</a>
-      <a href="#security" onclick="toggleMobileMenu()">Security</a>
-      <a href="#demo" onclick="toggleMobileMenu()">Demo</a>
-      <a href="#contact" onclick="toggleMobileMenu()">Book Audit</a>
-    </div>
-  </header>
-
-  <main>
     <!-- HERO -->
-    <section id="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="hero-kicker">AI FOR MED SPAS ONLY</div>
-          <h1 class="hero-title">Your Med Spa. Fully Automated — Securely.</h1>
-          <p class="hero-subtitle">
-            24/7 HIPAA-aware intake, booking, and follow-ups across every channel.
-            No missed calls. No slow replies. No lost clients.
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-tag">
+            <div class="hero-tag-dot"></div>
+            <span>For med spas only — not generic “AI agency” fluff</span>
+          </div>
+          <h1 class="hero-title">
+            Your clinic’s <span class="gold">24/7 AI concierge</span> that never misses a lead.
+          </h1>
+          <p class="hero-sub">
+            Swae Systems plugs a HIPAA-aware AI receptionist into your med spa. It answers pricing questions, handles pre-qualification, and books appointments across chat, text, and web — even at 2:00 a.m.
           </p>
 
           <div class="hero-pills">
-            <div class="pill">Med spas & aesthetics</div>
-            <div class="pill">HIPAA-aware workflows</div>
-            <div class="pill">24/7 AI receptionist</div>
+            <div class="hero-pill"><strong>Med spa native</strong> — built only for your industry</div>
+            <div class="hero-pill"><strong>24/7 response</strong> — under 1.5 seconds</div>
+            <div class="hero-pill"><strong>Intake to sheet</strong> — clean lead data in Google Sheets</div>
           </div>
 
-          <div class="hero-ctas">
-            <a class="btn btn-primary" href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener">
-              View Live Demo
+          <div class="hero-cta-row">
+            <a class="btn-primary" href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener">
+              <span>Book a 15-min walkthrough</span> <span>↗</span>
             </a>
-            <a class="btn btn-ghost" href="https://calendly.com/swaesystems/medspa-audit" target="_blank" rel="noopener">
-              Book Automation Audit
+            <a class="btn-ghost" href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener">
+              <span class="icon">▶</span> <span>Watch the live demo</span>
             </a>
           </div>
 
-          <p class="hero-note">
-            <strong>Built for:</strong> med spas, IV therapy, weight loss, TRT, and high-volume aesthetic clinics.
-          </p>
+          <div class="hero-footnote">
+            <span class="safe-dot"></span>
+            No long calls, no generic pitch. You see your own intake flow working in real-time — or we don’t work together.
+          </div>
         </div>
 
-        <div class="hero-media">
-          <div class="hero-card">
+        <div class="hero-right">
+          <div class="hero-frame">
+            <div class="hero-frame-header">
+              <span>Patient chat preview</span>
+              <span class="badge">Real-time AI intake</span>
+            </div>
             <div class="hero-screen">
-              <!-- Hero image placeholder -->
-              <img src="hero.PNG" alt="Swae Systems med spa automation dashboard preview" />
-            </div>
-            <div class="hero-label">
-              <span>Live 24/7 AI Front Desk</span>
-              <span>Med Spa Example · Demo</span>
-            </div>
-            <div class="hero-mini-metrics">
-              <div class="hero-metric">
-                <strong>0 missed DMs</strong><br />
-                last 30 days
+              <div class="hero-overlay"></div>
+              <div class="hero-chat">
+                <div class="bubble client">
+                  “Hi, do you have any openings for Botox next week? I’m also curious on pricing.”
+                </div>
+                <div class="bubble ai">
+                  <strong>Swae:</strong> “Absolutely — we’d love to take care of you. Our Botox starts at $11/unit and most clients invest between $250–$450 per visit.<br><br>
+                  What area are you hoping to treat and what days work best? I’ll check your options now.”
+                </div>
+                <div class="bubble client">
+                  “Forehead + frown lines. I’m free Tuesday or Thursday after 4 pm.”
+                </div>
+                <div class="bubble ai">
+                  “Perfect. Last question — what’s your name, preferred contact, and best number? I’ll lock in times and send them straight to your phone.”
+                </div>
               </div>
-              <div class="hero-metric">
-                <strong>Instant replies</strong><br />
-                IG · SMS · Site
+              <div class="hero-status-row">
+                <div class="status-pill">
+                  <div class="status-pill-dot"></div>
+                  <span>Lead captured • Auto-logged to Google Sheet</span>
+                </div>
+                <div class="mini-metric">
+                  Response time <span>0.9s</span>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="hero-orbit">
-            <div class="hero-orbit-label">Swae Systems</div>
-            <div class="hero-orbit-main">Your med spa’s intake, booking, and follow-ups — on autopilot.</div>
+      <!-- WHY -->
+      <section class="section" id="why">
+        <div class="section-inner">
+          <div class="section-label">Why med spas choose Swae Systems</div>
+          <h2 class="section-title">You spend money to get leads. We make sure none of them slip through.</h2>
+          <div class="grid-3">
+            <div class="card">
+              <div class="card-pill">
+                <span class="dot-danger"></span> Missed calls & unread DMs
+              </div>
+              <h3>Every unanswered inquiry is a lost booking.</h3>
+              <p>
+                Most med spas lose thousands per month because staff are busy in treatment rooms. Calls go to voicemail, DMs stack up, and “I’ll reply later” never happens. Our AI concierge replies instantly and turns those moments into booked consults.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-pill">
+                <span class="dot-safe"></span> AI that speaks “med spa”
+              </div>
+              <h3>Trained to talk like your brand, not a robot.</h3>
+              <p>
+                We collect your menu, pricing ranges, aftercare rules, and tone. The system explains Botox vs filler, pre/post-care, memberships, and promotions just like your best front desk — in any language your clients message in.
+              </p>
+            </div>
+            <div class="card">
+              <div class="card-pill">
+                <span class="dot-safe"></span> Clean intake data in sheets
+              </div>
+              <h3>Names, numbers, treatment interest — all structured.</h3>
+              <p>
+                Every conversation turns into a tidy row in your Google Sheet: name, phone, email, preferred treatment, time window, channel, and notes. Your team simply opens the sheet and confirms bookings instead of chasing scattered messages.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="section" id="how">
+        <div class="section-inner">
+          <div class="section-label">How it works</div>
+          <h2 class="section-title">From first “Hi” to a fully qualified lead — in under 60 seconds.</h2>
+          <div class="how-grid">
+            <div>
+              <div class="steps">
+                <div class="step">
+                  <div class="step-number">1</div>
+                  <div class="step-body">
+                    <h3>We plug into your existing flow.</h3>
+                    <p>
+                      Website chat, Instagram DMs, SMS — wherever patients already reach out. We connect your AI concierge so it starts answering within seconds, 24/7, even when your team is home with their families.
+                    </p>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-number">2</div>
+                  <div class="step-body">
+                    <h3>It pre-qualifies and collects intake.</h3>
+                    <p>
+                      The system asks the same questions your front desk would: treatment interest, goals, availability, budget range, and basic medical pre-screens. All saved as structured data, not messy screenshots.
+                    </p>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-number">3</div>
+                  <div class="step-body">
+                    <h3>The lead drops into your Google Sheet.</h3>
+                    <p>
+                      Each new lead is sent straight into a shared Google Sheet. Your coordinator starts the day with a list of warm, ready-to-book patients instead of digging through DMs and missed call logs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="how-card">
+              <div class="how-card-inner">
+                <div class="how-card-title">Example: “New Botox lead — Instagram DM”</div>
+                <div class="mini-row">
+                  <span>Source</span>
+                  <span class="value">Instagram → AI Concierge</span>
+                </div>
+                <div class="mini-row">
+                  <span>Fields captured</span>
+                  <span class="value">Name · Phone · Email · Treatment · Time window</span>
+                </div>
+                <div class="mini-row">
+                  <span>Destination</span>
+                  <span class="value">Med Spa Leads — Google Sheet</span>
+                </div>
+                <div class="mini-row">
+                  <span>Owner sees it</span>
+                  <span class="value">In seconds, not days</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact">
+        <div class="section-inner">
+          <div class="section-label">Next steps</div>
+          <h2 class="section-title">See your own med spa’s flow running in real-time.</h2>
+
+          <div class="contact-grid">
+            <div class="contact-card">
+              <p>
+                We don’t do generic sales calls. On your 15-minute walkthrough, we plug in a simple version of your menu, show you how the AI concierge talks to your patients, and how every lead lands inside your Google Sheet.
+              </p>
+              <div class="contact-lines">
+                <div>📞 Call / Text: <a href="tel:12096408636">+1 (209) 640-8636</a></div>
+                <div>📧 Email: <a href="mailto:swaesystems.ai@gmail.com">swaesystems.ai@gmail.com</a></div>
+                <div>🗓 Book directly: <a href="https://calendly.com/your-calendly-link/medspa-demo" target="_blank" rel="noopener">Calendly — Med Spa AI Demo</a></div>
+              </div>
+            </div>
+
+            <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+              <h3>Prefer a quick form? Share your details.</h3>
+              <div class="form-grid">
+                <div>
+                  <label for="name">Your name</label>
+                  <input id="name" name="name" type="text" placeholder="Alex from Nova Med Spa" required />
+                </div>
+                <div>
+                  <label for="clinic">Clinic name</label>
+                  <input id="clinic" name="clinic" type="text" placeholder="Nova Med Spa" required />
+                </div>
+                <div>
+                  <label for="phone">Phone number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="+1 (555) 123-4567" required />
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@yourclinic.com" required />
+                </div>
+              </div>
+
+              <div class="form-row-full">
+                <label for="focus">What do you want the AI to handle first?</label>
+                <select id="focus" name="focus">
+                  <option value="">Select an option</option>
+                  <option value="missed-calls">Missed calls & voicemails</option>
+                  <option value="instagram-dms">Instagram DMs & inquiries</option>
+                  <option value="website-chat">Website chat & after-hours traffic</option>
+                  <option value="all-of-the-above">All of the above</option>
+                </select>
+              </div>
+
+              <div class="form-row-full">
+                <label for="notes">Anything you want us to know?</label>
+                <textarea id="notes" name="notes" placeholder="We get a lot of Botox + filler inquiries after 6 pm. We just need someone to respond and pre-qualify them."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary btn-form">
+                <span>Submit &amp; get a walkthrough link</span>
+              </button>
+
+              <div class="form-footnote">
+                <span>Note:</span> We keep intake flows HIPAA-aware and can avoid PHI in chat if you prefer. This form is for demo purposes only.
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-row">
+        <div>© <span id="year"></span> Swae Systems. 24/7 AI concierge for med spas.</div>
+        <div class="footer-links">
+          <a href="#why">Why med spas</a>
+          <a href="#how">How it works</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
-    </section>
+    </footer>
+  </div>
 
-    <!-- SYSTEM / WHAT WE FIX / WHAT WE DO -->
-    <section id="system" class="section section-dark">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="eyebrow">System overview</div>
-          <h2 class="section-title">From chaos in the inbox to a clean, automated pipeline.</h2>
-          <p class="section-subtitle">
-            We eliminate the daily operational leaks inside your med spa — missed calls, slow DMs, manual booking, and scattered follow-ups.
-          </p>
-        </div>
+  <!-- CHAT WIDGET PLACEHOLDER (BOTPRESS / BOTPRESS WEBCHAT) -->
+  <!-- Replace this with your real Botpress webchat script -->
+  <!--
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script>
+    window.botpressWebChat.init({
+      botId: "YOUR_BOT_ID",
+      hostUrl: "https://cdn.botpress.cloud/webchat/v1",
+      messagingUrl: "https://api.botpress.cloud",
+      clientId: "YOUR_CLIENT_ID",
+      botName: "Swae Med Spa Concierge",
+      containerWidth: "420px",
+      hideWidget: false
+    });
+  </script>
+  -->
 
-        <div class="two-col">
-          <div class="card">
-            <div class="card-label">What we fix</div>
-            <h3 class="card-title">The problems slowing down your med spa.</h3>
-            <div class="bullet-grid">
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Missed calls & slow replies</div>
-                  <div class="bullet-text">
-                    Clients move on after 20–30 seconds. Your AI answers instantly on every channel.
-                  </div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Manual intake & booking</div>
-                  <div class="bullet-text">
-                    No more copy-paste. Forms, pre-screening, and booking are handled end-to-end.
-                  </div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">DM chaos across platforms</div>
-                  <div class="bullet-text">
-                    Instagram, SMS, Facebook, WhatsApp, website — one AI brain handling all of it.
-                  </div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">No-show & cold lead problems</div>
-                  <div class="bullet-text">
-                    Automated reminders and follow-ups keep your calendar full and your pipeline warm.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-          <div class="card card-ghost">
-            <div class="card-label">What we automate</div>
-            <h3 class="card-title">A full AI front desk for your med spa.</h3>
-            <p class="card-text">
-              This is not a simple chatbot. It is a full operations layer handling client conversations, booking, and routing — 24/7.
-            </p>
+    // Mobile nav
+    const burger = document.getElementById("burger");
+    const navMobile = document.getElementById("nav-mobile");
 
-            <div class="bullet-grid">
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">24/7 AI receptionist</div>
-                  <div class="bullet-text">
-                    Answers questions, explains treatments, and routes clients to booking — in your tone, in any language.
-                  </div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Intake & forms</div>
-                  <div class="bullet-text">
-                    Collects the details you need before consults — securely structured and ready for your team.
-                  </div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Booking & rescheduling</div>
-                  <div class="bullet-text">
-                    Helps clients pick a time, confirms, and updates your calendar without staff involvement.
-                  </div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Pre & post-care messaging</div>
-                  <div class="bullet-text">
-                    Sends treatment-specific instructions automatically — Botox, laser, IV, peels, and more.
-                  </div>
-                </div>
-              </div>
-            </div>
+    function closeMobileNav() {
+      burger.classList.remove("open");
+      navMobile.style.display = "none";
+    }
 
-            <div class="chip-list" style="margin-top: 1.1rem;">
-              <div class="chip">Botox & fillers</div>
-              <div class="chip">Laser hair removal</div>
-              <div class="chip">IV therapy</div>
-              <div class="chip">Weight loss</div>
-              <div class="chip">Hydrafacial</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 2.3rem; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem; align-items: center;">
-          <div>
-            <div class="card-label">How it runs</div>
-            <h3 class="card-title" style="margin-bottom: 0.6rem;">Multi-channel, one AI brain.</h3>
-            <p class="card-text" style="margin-bottom: 0.9rem;">
-              Your med spa’s conversations live in one intelligent system — not scattered across logins and staff phones.
-            </p>
-            <div class="bullet-grid">
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Instagram, SMS, Facebook, WhatsApp, website</div>
-                  <div class="bullet-text">All handled by the same AI, with a consistent tone and playbook.</div>
-                </div>
-              </div>
-              <div class="bullet">
-                <div class="bullet-dot"></div>
-                <div>
-                  <div class="bullet-title">Botpress + automation backbone</div>
-                  <div class="bullet-text">
-                    Engineered on enterprise-grade tools instead of generic templates or chatbot plug-ins.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-card" style="margin-top: 0;">
-            <div class="hero-screen">
-              <!-- Channels / system image -->
-              <img src="channels.PNG" alt="Channels handled by Swae Systems AI receptionist for med spas" />
-            </div>
-            <div class="hero-label">
-              <span>Every channel, one AI brain.</span>
-              <span>Med spa example flow</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESULTS -->
-    <section id="results" class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <div class="eyebrow">Results</div>
-          <h2 class="section-title">More bookings. Less workload. Zero human bottlenecks.</h2>
-          <p class="section-subtitle">
-            The goal is not more software. The goal is a med spa that feels calm on the inside and fully booked on the outside.
-          </p>
-        </div>
-
-        <div class="cards-3">
-          <div class="card">
-            <div class="result-pill">Volume</div>
-            <div class="result-number">More qualified bookings</div>
-            <p class="result-text">
-              Every DM, text, and site visitor is guided into a clear booking path — no dead ends or “we’ll get back to you.”
-            </p>
-          </div>
-          <div class="card">
-            <div class="result-pill">Team</div>
-            <div class="result-number">Less front desk pressure</div>
-            <p class="result-text">
-              Staff stop juggling five inboxes and chasing missed calls. They focus on clients in the room.
-            </p>
-          </div>
-          <div class="card">
-            <div class="result-pill">Operations</div>
-            <div class="result-number">A predictable pipeline</div>
-            <p class="result-text">
-              Intake is structured, follow-ups are automatic, and leadership has real visibility on every lead.
-            </p>
-          </div>
-        </div>
-
-        <div class="before-after">
-          <div class="before-after-card">
-            <div class="before-tag">Before Swae</div>
-            <ul class="simple-list">
-              <li>Missed calls and slow responses across platforms.</li>
-              <li>Manual intake forms and missed details.</li>
-              <li>Team answering the same questions all day.</li>
-              <li>Leads falling through when staff gets busy.</li>
-            </ul>
-          </div>
-          <div class="before-after-card">
-            <div class="after-tag">After Swae</div>
-            <ul class="simple-list">
-              <li>Instant replies to every new inquiry, 24/7.</li>
-              <li>Intake, pre-screening, and booking fully automated.</li>
-              <li>Staff focused on in-person experience, not inboxes.</li>
-              <li>Consistent follow-ups until clients book or say no.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECURITY / HIPAA -->
-    <section id="security" class="section section-dark">
-      <div class="section-inner security-grid">
-        <div>
-          <div class="eyebrow">Security & privacy</div>
-          <h2 class="section-title">HIPAA-aware automation, designed for clinical environments.</h2>
-          <p class="section-subtitle">
-            We treat your med spa like what it is — a healthcare setting. The automation is built around privacy, control, and clear data handling.
-          </p>
-
-          <div style="margin-top: 1.2rem;">
-            <div class="bullet">
-              <div class="bullet-dot"></div>
-              <div>
-                <div class="bullet-title">HIPAA-aware workflows</div>
-                <div class="bullet-text">
-                  Flows are designed to avoid unnecessary exposure of sensitive information while still moving intake forward.
-                </div>
-              </div>
-            </div>
-            <div class="bullet" style="margin-top: 0.7rem;">
-              <div class="bullet-dot"></div>
-              <div>
-                <div class="bullet-title">No training on your client data</div>
-                <div class="bullet-text">
-                  Conversations are not used to train generic models. Your data stays dedicated to your system.
-                </div>
-              </div>
-            </div>
-            <div class="bullet" style="margin-top: 0.7rem;">
-              <div class="bullet-dot"></div>
-              <div>
-                <div class="bullet-title">Clear data paths</div>
-                <div class="bullet-text">
-                  Information moves into your chosen tools (CRM / sheets / internal systems) — not into random platforms or inboxes.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="security-badges">
-            <div class="security-pill">HIPAA-Aware Design</div>
-            <div class="security-pill">Private Data Handling</div>
-            <div class="security-pill">Clinical Use Case Focus</div>
-          </div>
-
-          <p class="security-note">
-            <strong>Note:</strong> Swae Systems focuses on HIPAA-aware workflows and responsible data handling for med spas and clinics.
-            You maintain control of which systems store client information and how it is accessed.
-          </p>
-        </div>
-
-        <div class="security-media">
-          <img src="security.PNG" alt="Secure AI automation for med spas and clinics" />
-        </div>
-      </div>
-    </section>
-
-    <!-- DEMO -->
-    <section id="demo" class="section">
-      <div class="section-inner demo-layout">
-        <div>
-          <div class="eyebrow">Live demo</div>
-          <h2 class="section-title">See the med spa system in action.</h2>
-          <p class="section-subtitle">
-            Walk through a real intake and booking flow — exactly how a new client experiences your med spa when Swae is running in the background.
-          </p>
-
-          <div style="margin-top: 1.2rem;">
-            <div class="bullet">
-              <div class="bullet-dot"></div>
-              <div>
-                <div class="bullet-title">AI receptionist conversation</div>
-                <div class="bullet-text">
-                  Watch how the system answers questions, handles objections, and guides clients into a booking.
-                </div>
-              </div>
-            </div>
-            <div class="bullet" style="margin-top: 0.7rem;">
-              <div class="bullet-dot"></div>
-              <div>
-                <div class="bullet-title">Intake & booking flow</div>
-                <div class="bullet-text">
-                  See how client details are collected cleanly, then pushed into your calendar and internal systems.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <a class="btn btn-primary" style="margin-top: 1.4rem;" href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener">
-            Open Live Demo
-          </a>
-
-          <a class="demo-link" href="https://calendly.com/swaesystems/medspa-audit" target="_blank" rel="noopener">
-            <span>➝</span> Prefer a guided walkthrough? Book a 1:1 automation audit.
-          </a>
-        </div>
-
-        <div class="demo-screen">
-          <!-- Demo visual placeholder -->
-          <img src="system_flow.PNG" alt="Swae Systems med spa automation flow preview" />
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="section section-dark">
-      <div class="section-inner contact-grid">
-        <div class="contact-card">
-          <div class="card-label">Next step</div>
-          <h3 class="card-title">Ready to scale your med spa without more staff?</h3>
-          <p class="card-text">
-            If your clinic handles a steady flow of inquiries and appointments, the next best hire is not another front desk rep — it’s a system that never sleeps.
-          </p>
-
-          <a class="btn btn-primary" href="https://calendly.com/swaesystems/medspa-audit" target="_blank" rel="noopener">
-            Book a Free Automation Audit
-          </a>
-
-          <div class="cta-bottom">
-            <strong>We’ll walk your exact intake and booking process,</strong> map the leaks, and show you what it looks like fully automated with Swae.
-          </div>
-        </div>
-
-        <div>
-          <div class="card-label">Direct contact</div>
-          <div class="contact-lines">
-            <p>
-              <span class="contact-label">Phone / Text</span><br />
-              <span class="contact-value">
-                <a href="tel:+12096408636">(209) 640-8636</a>
-              </span>
-            </p>
-            <p>
-              <span class="contact-label">Email</span><br />
-              <span class="contact-value">
-                <a href="mailto:swaesystems.ai@gmail.com">SwaeSystems.ai@gmail.com</a>
-              </span>
-            </p>
-          </div>
-
-          <div class="contact-secondary" style="margin-top: 0.9rem;">
-            <p>Best fit if:</p>
-            <ul>
-              <li>You run a med spa, IV clinic, weight loss clinic, TRT clinic, or aesthetics practice.</li>
-              <li>You handle frequent inquiries and want a cleaner, more automated pipeline.</li>
-              <li>You care about client experience, privacy, and a luxury brand image.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="year"></span> Swae Systems. All rights reserved.</div>
-      <div class="footer-right">
-        <span>Med Spa Automation Only</span>
-        <span>HIPAA-aware workflows</span>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<script>
-  // Mobile nav toggle
-  function toggleMobileMenu() {
-    var menu = document.getElementById('nav-mobile');
-    if (!menu) return;
-    menu.classList.toggle('open');
-  }
-
-  // Set current year in footer
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    burger.addEventListener("click", () => {
+      const isOpen = burger.classList.contains("open");
+      if (isOpen) {
+        closeMobileNav();
+      } else {
+        burger.classList.add("open");
+        navMobile.style.display = "block";
+      }
+    });
+  </script>
 </body>
 </html>
