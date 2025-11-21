@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Swae Systems — 24/7 AI Concierge for Clinics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Swae Systems builds 24/7 AI intake and booking systems for med spas and high-volume clinics, so your staff can focus on patients while every lead gets answered." />
+  <meta name="description" content="Swae Systems builds 24/7 AI intake and booking systems for med spas and high-volume clinics, so every patient message is answered in seconds and your team focuses on care, not chasing leads." />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,21 +12,20 @@
 
   <style>
     :root {
-      --bg-deep: #030308;
-      --bg-soft: #080812;
-      --card: rgba(10, 10, 16, 0.96);
-      --glass: rgba(5, 5, 9, 0.82);
+      --bg-main: #020202;
+      --bg-soft: #080808;
+      --card: #090909;
       --stroke-soft: rgba(255, 255, 255, 0.08);
-      --gold: #f6d58a;
-      --gold-deep: #c89a3a;
-      --text-main: #f7f7f7;
-      --text-dim: #a0a0ad;
-      --text-soft: #7a7a85;
+      --gold: #f5d47c;
+      --gold-deep: #c99b38;
+      --text-main: #f5f5f5;
+      --text-dim: #a0a0a8;
+      --text-soft: #7b7b84;
       --radius-lg: 24px;
       --radius-md: 16px;
       --radius-pill: 999px;
-      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.88);
-      --transition: 0.22s ease-out;
+      --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.9);
+      --transition: 0.2s ease-out;
     }
 
     * { box-sizing: border-box; }
@@ -34,9 +33,9 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #141420 0, #030308 55%, #000000 100%);
+      background: radial-gradient(circle at top, #151515 0, #020202 55%, #000 100%);
       color: var(--text-main);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       scroll-behavior: smooth;
     }
 
@@ -71,13 +70,12 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 18px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: linear-gradient(120deg, rgba(246,213,138,0.12), transparent 50%),
-                  rgba(7,7,12,0.86);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(5, 5, 5, 0.92);
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(246,213,138,0.35);
-      box-shadow: 0 18px 60px rgba(0,0,0,0.9);
+      border: 1px solid rgba(245, 212, 124, 0.45);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.95);
     }
 
     .nav-left {
@@ -116,7 +114,8 @@
     .nav-links a::after {
       content: '';
       position: absolute;
-      left: 0; bottom: -2px;
+      left: 0;
+      bottom: -2px;
       width: 0;
       height: 1px;
       background: linear-gradient(90deg, var(--gold), var(--gold-deep));
@@ -133,9 +132,8 @@
       gap: 6px;
       padding: 7px 16px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(246,213,138,0.6);
-      background: radial-gradient(circle at 0 0, rgba(246,213,138,0.28), transparent 70%),
-                  rgba(3,3,7,0.98);
+      border: 1px solid rgba(245, 212, 124, 0.65);
+      background: rgba(4, 4, 4, 0.98);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -150,9 +148,8 @@
 
     .nav-cta:hover {
       transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(246,213,138,0.4);
-      background: radial-gradient(circle at 0 0, rgba(246,213,138,0.4), transparent 70%),
-                  rgba(2,2,6,0.98);
+      box-shadow: 0 18px 40px rgba(245, 212, 124, 0.4);
+      background: #020202;
     }
 
     .hamburger {
@@ -160,10 +157,9 @@
       width: 38px;
       height: 30px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(246,213,138,0.5);
-      background: rgba(3,3,7,0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(245, 212, 124, 0.6);
+      background: rgba(5, 5, 5, 0.95);
+      display: none;
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -178,7 +174,8 @@
 
     .hamburger-line {
       position: absolute;
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       height: 1px;
       border-radius: 999px;
       background: linear-gradient(90deg, #fdf7dd, var(--gold), var(--gold-deep));
@@ -191,14 +188,14 @@
 
     .hamburger.open .hamburger-line:nth-child(1) {
       top: 50%;
-      transform: translateY(-50%) rotate(42deg);
+      transform: translateY(-50%) rotate(40deg);
     }
     .hamburger.open .hamburger-line:nth-child(2) {
       opacity: 0;
     }
     .hamburger.open .hamburger-line:nth-child(3) {
       bottom: 50%;
-      transform: translateY(50%) rotate(-42deg);
+      transform: translateY(50%) rotate(-40deg);
     }
 
     .nav-right {
@@ -219,9 +216,9 @@
         position: fixed;
         inset: 72px 16px auto 16px;
         border-radius: 20px;
-        border: 1px solid rgba(246,213,138,0.5);
+        border: 1px solid rgba(245, 212, 124, 0.6);
         padding: 14px 16px 12px;
-        background: rgba(3,3,7,0.96);
+        background: rgba(3, 3, 3, 0.98);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         display: none;
@@ -240,20 +237,29 @@
     /* HERO */
 
     .hero {
-      margin-top: 40px;
-      padding: 28px 26px 24px;
+      margin-top: 48px;
+      padding: 32px 26px 30px;
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top, rgba(246,213,138,0.16), transparent 60%),
-                  rgba(5,5,10,0.96);
-      border: 1px solid rgba(246,213,138,0.35);
+      background: #050505;
+      border: 1px solid rgba(245, 212, 124, 0.4);
       box-shadow: var(--shadow-soft);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    @media (max-width: 600px) {
-      .hero {
-        padding: 20px 18px 20px;
-      }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(245, 212, 124, 0.12), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-kicker {
@@ -261,14 +267,14 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-dim);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(30px, 4vw, 40px);
-      line-height: 1.12;
-      margin: 0 0 10px;
+      font-size: clamp(30px, 4.4vw, 42px);
+      line-height: 1.15;
+      margin: 0 0 12px;
     }
 
     .hero-title span {
@@ -279,7 +285,7 @@
 
     .hero-sub {
       max-width: 540px;
-      margin: 0 auto 20px;
+      margin: 0 auto 22px;
       font-size: 14px;
       color: var(--text-dim);
       line-height: 1.6;
@@ -290,7 +296,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .btn-primary {
@@ -298,22 +304,22 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 11px 22px;
+      padding: 11px 24px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(253,247,221,0.8);
+      border: 1px solid rgba(253, 247, 221, 0.9);
       background: linear-gradient(135deg, #fdf6d6, var(--gold));
-      color: #221606;
+      color: #201407;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 20px 40px rgba(246,213,138,0.45);
+      box-shadow: 0 20px 40px rgba(245, 212, 124, 0.5);
       transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
     }
 
     .btn-primary:hover {
       transform: translateY(-1px);
-      box-shadow: 0 26px 60px rgba(246,213,138,0.6);
-      filter: brightness(1.03);
+      box-shadow: 0 26px 60px rgba(245, 212, 124, 0.65);
+      filter: brightness(1.02);
     }
 
     .btn-ghost {
@@ -321,11 +327,10 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 10px 18px;
+      padding: 10px 20px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(246,213,138,0.5);
-      background: radial-gradient(circle at 0 0, rgba(246,213,138,0.24), transparent 70%),
-                  rgba(3,3,8,0.98);
+      border: 1px solid rgba(245, 212, 124, 0.6);
+      background: #020202;
       color: var(--text-main);
       font-size: 13px;
       cursor: pointer;
@@ -334,9 +339,8 @@
 
     .btn-ghost:hover {
       transform: translateY(-1px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.88);
-      background: radial-gradient(circle at 0 0, rgba(246,213,138,0.3), transparent 70%),
-                  rgba(2,2,6,0.98);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9);
+      background: #050505;
     }
 
     .hero-tags {
@@ -351,8 +355,8 @@
     .hero-tag {
       padding: 4px 10px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255,255,255,0.04);
-      background: rgba(3,3,8,0.96);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #040404;
     }
 
     /* SECTIONS */
@@ -397,8 +401,6 @@
       line-height: 1.6;
     }
 
-    /* Pain / solution */
-
     .columns-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -406,10 +408,10 @@
     }
 
     @media (max-width: 820px) {
-      .columns-2 { grid-template-columns: minmax(0,1fr); }
+      .columns-2 { grid-template-columns: minmax(0, 1fr); }
     }
 
-    .card-bad, .card-good {
+    .card-dark {
       border-radius: var(--radius-md);
       padding: 16px 16px 18px;
       background: var(--card);
@@ -418,16 +420,8 @@
       color: var(--text-soft);
     }
 
-    .card-bad {
-      background: radial-gradient(circle at top, rgba(255,120,120,0.14), transparent 60%),
-                  var(--card);
-      border-color: rgba(255,120,120,0.3);
-    }
-
-    .card-good {
-      background: radial-gradient(circle at top, rgba(246,213,138,0.16), transparent 60%),
-                  var(--card);
-      border-color: rgba(246,213,138,0.35);
+    .card-dark.highlight {
+      border-color: rgba(245, 212, 124, 0.45);
     }
 
     .card-label {
@@ -464,11 +458,12 @@
       height: 5px;
       border-radius: 50%;
       margin-top: 6px;
-      background: rgba(255,255,255,0.36);
+      background: rgba(255, 255, 255, 0.35);
     }
 
-    .card-bad .bullet-dot { background: rgba(255,120,120,0.9); }
-    .card-good .bullet-dot { background: var(--gold); }
+    .card-dark.highlight .bullet-dot {
+      background: var(--gold);
+    }
 
     .card-footnote {
       font-size: 11px;
@@ -476,26 +471,24 @@
       margin-top: 10px;
     }
 
-    /* Demo explainer */
-
     .demo-wrap {
       border-radius: var(--radius-lg);
       padding: 18px 18px 16px;
       background: var(--card);
       border: 1px solid var(--stroke-soft);
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       gap: 18px;
     }
 
     @media (max-width: 840px) {
-      .demo-wrap { grid-template-columns: minmax(0,1fr); }
+      .demo-wrap { grid-template-columns: minmax(0, 1fr); }
     }
 
-    .demo-main-title {
+    .demo-title {
       font-size: 15px;
-      margin-bottom: 8px;
       color: var(--text-main);
+      margin-bottom: 8px;
     }
 
     .demo-list {
@@ -520,20 +513,18 @@
     .chip {
       padding: 4px 9px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(3,3,8,0.96);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #050505;
     }
-
-    /* Why Swae / process */
 
     .three-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
     @media (max-width: 880px) {
-      .three-grid { grid-template-columns: minmax(0,1fr); }
+      .three-grid { grid-template-columns: minmax(0, 1fr); }
     }
 
     .small-card {
@@ -561,12 +552,9 @@
       font-size: 12px;
       color: #fdf6d6;
       margin-bottom: 8px;
-      background: radial-gradient(circle at 0 0, rgba(246,213,138,0.35), transparent 70%),
-                  rgba(3,3,7,0.98);
-      border: 1px solid rgba(246,213,138,0.6);
+      background: #050505;
+      border: 1px solid rgba(245, 212, 124, 0.6);
     }
-
-    /* Pricing / fit (no numbers) */
 
     .fit-card {
       border-radius: var(--radius-md);
@@ -588,19 +576,16 @@
     .fit-pill {
       padding: 4px 10px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(3,3,8,0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #040404;
     }
-
-    /* CTA / footer */
 
     .cta {
       margin-top: 50px;
       border-radius: var(--radius-lg);
       padding: 18px 18px 20px;
-      background: radial-gradient(circle at top, rgba(246,213,138,0.22), transparent 70%),
-                  rgba(5,5,10,0.98);
-      border: 1px solid rgba(246,213,138,0.55);
+      background: #050505;
+      border: 1px solid rgba(245, 212, 124, 0.55);
       box-shadow: var(--shadow-soft);
     }
 
@@ -633,7 +618,7 @@
     footer {
       margin-top: 32px;
       padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       font-size: 11px;
       color: var(--text-soft);
       display: flex;
@@ -655,6 +640,7 @@
     }
 
     @media (max-width: 520px) {
+      .hero { padding: 24px 18px 22px; }
       .hero-ctas { flex-direction: column; }
       .btn-primary, .btn-ghost { width: 100%; }
     }
@@ -708,29 +694,32 @@
     <!-- HERO -->
     <main>
       <section class="hero" id="top">
-        <div class="hero-kicker">For med spas & high-volume clinics</div>
-        <h1 class="hero-title">
-          Your clinic’s first reply should feel <span>instant and intentional</span>.
-        </h1>
-        <p class="hero-sub">
-          Swae Systems builds 24/7 AI intake &amp; booking systems that answer patient messages in seconds,
-          capture details, and hand your team qualified leads — without adding another person to payroll.
-        </p>
+        <div class="hero-inner">
+          <div class="hero-kicker">For med spas & high-volume clinics</div>
+          <h1 class="hero-title">
+            Your clinic’s first reply should feel<br />
+            <span>instant, intentional and on-brand.</span>
+          </h1>
+          <p class="hero-sub">
+            Swae Systems builds 24/7 AI intake &amp; booking systems that answer patient messages in seconds,
+            capture key details, and hand your team qualified leads — without adding another person to payroll.
+          </p>
 
-        <div class="hero-ctas">
-          <!-- DEMO LINK -> your system page -->
-          <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener noreferrer" class="btn-primary">
-            ⚡ Try the live demo
-          </a>
-          <a href="#book" class="btn-ghost">
-            ▻ Book a 15-minute walkthrough
-          </a>
-        </div>
+          <div class="hero-ctas">
+            <!-- REAL DEMO LINK -->
+            <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              ⚡ Try the live demo
+            </a>
+            <a href="#book" class="btn-ghost">
+              ▻ Book a 15-minute walkthrough
+            </a>
+          </div>
 
-        <div class="hero-tags">
-          <span class="hero-tag">Built only for med spas & clinics</span>
-          <span class="hero-tag">HIPAA-aware workflow design</span>
-          <span class="hero-tag">No long contracts. No setup fee.</span>
+          <div class="hero-tags">
+            <span class="hero-tag">Built only for med spas & clinics</span>
+            <span class="hero-tag">HIPAA-aware workflow design</span>
+            <span class="hero-tag">No long contracts. No setup fee.</span>
+          </div>
         </div>
       </section>
 
@@ -742,13 +731,13 @@
             <h2 class="section-title">You don’t have a lead problem — you have a <span>response problem</span>.</h2>
           </div>
           <p class="section-sub">
-            Most clinics already get plenty of interest. The break happens between “I’m curious” and
-            “I’m booked.” That’s where your AI concierge sits.
+            Most clinics already get plenty of interest. The break happens between “I’m curious” and “I’m booked.”
+            That’s where your AI concierge sits.
           </p>
         </div>
 
         <div class="columns-2">
-          <div class="card-bad">
+          <div class="card-dark">
             <div class="card-label">Without Swae</div>
             <div class="card-title">Good patients slip through the cracks.</div>
             <ul class="bullet-list">
@@ -766,11 +755,11 @@
               </li>
             </ul>
             <div class="card-footnote">
-              You’ve already paid to earn their attention — but someone else closes them.
+              You’ve already paid to earn their attention — someone else shouldn’t be the one to close them.
             </div>
           </div>
 
-          <div class="card-good">
+          <div class="card-dark highlight">
             <div class="card-label">With Swae Systems</div>
             <div class="card-title">Every message gets handled like a VIP.</div>
             <ul class="bullet-list">
@@ -802,14 +791,14 @@
             <h2 class="section-title">A concierge that sounds like <span>your clinic</span>, not a script.</h2>
           </div>
           <p class="section-sub">
-            Your patients don’t see “a bot.” They see a friendly assistant that understands your services,
-            answers questions, and guides them to the next step.
+            Patients don’t see “a bot.” They see a friendly assistant that understands your services,
+            answers questions and guides them to the next step.
           </p>
         </div>
 
         <div class="demo-wrap">
           <div>
-            <div class="demo-main-title">What patients experience</div>
+            <div class="demo-title">What patients experience</div>
             <ul class="demo-list">
               <li>They ask about a treatment on your site, Instagram or WhatsApp.</li>
               <li>They get a fast, clear reply that matches your brand voice and sets expectations.</li>
@@ -818,12 +807,12 @@
             </ul>
 
             <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener noreferrer" class="btn-ghost">
-              ⚡ Run through the live demo
+              ⚡ Run the live demo
             </a>
           </div>
 
           <div>
-            <div class="demo-main-title">What your team sees</div>
+            <div class="demo-title">What your team sees</div>
             <ul class="demo-list">
               <li>One place where every conversation is captured with structured fields.</li>
               <li>Leads clearly marked by treatment interest and timing so they know who to call first.</li>
@@ -839,7 +828,7 @@
         </div>
       </section>
 
-      <!-- WHY SWAE / PROCESS -->
+      <!-- TRUST / PROCESS -->
       <section id="trust">
         <div class="section-header">
           <div>
@@ -847,8 +836,8 @@
             <h2 class="section-title">We design the <span>system</span>, not just the bot.</h2>
           </div>
           <p class="section-sub">
-            Our job is to understand how your clinic runs, then build an intake &amp; follow-up flow that fits
-            into it cleanly — while respecting patient privacy.
+            Our job is to understand how your clinic runs, then build an intake and follow-up flow that fits into it
+            cleanly — while respecting patient privacy.
           </p>
         </div>
 
@@ -863,7 +852,7 @@
           </div>
           <div class="small-card">
             <div class="small-card-title">Ongoing refinement</div>
-            <div>We monitor real conversations, tighten responses, and adjust flows as your offers and seasons change — so the system doesn’t go stale.</div>
+            <div>We monitor real conversations, tighten responses and adjust flows as your offers and seasons change — so the system doesn’t go stale.</div>
           </div>
         </div>
 
@@ -889,7 +878,7 @@
         </div>
       </section>
 
-      <!-- FIT / PRICING (NO NUMBERS) -->
+      <!-- FIT (NO PRICES) -->
       <section id="fit">
         <div class="section-header">
           <div>
@@ -928,8 +917,8 @@
           <div>
             <div class="cta-main">Ready to walk through it together?</div>
             <div class="cta-sub">
-              Try the demo, then book a short call. We’ll show you exactly how this would look inside your clinic, and
-              if it makes sense to move forward.
+              Try the demo, then book a short call. We’ll show you exactly how this would look inside your clinic,
+              and if it makes sense to move forward.
             </div>
             <div class="cta-note">
               A quick conversation, your questions answered, and a clear next step — either with us or without us.
@@ -939,7 +928,7 @@
             <a href="https://swaesystems.github.io/system-By-Swae/" target="_blank" rel="noopener noreferrer" class="btn-ghost">
               ⚡ Run the live demo
             </a>
-            <!-- replace with real Calendly when you're ready -->
+            <!-- replace Calendly link when ready -->
             <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
               ▻ Book a 15-minute walkthrough
             </a>
